@@ -1,15 +1,29 @@
 "use client";
-import { LayoutGroup, motion, useScroll } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { HEADER_HEIGHT } from "../layout/header";
 
 const ScrollProgressBar = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ container: ref });
-
+  const { scrollYProgress } = useScroll();
+  const topPosition = useTransform(
+    scrollYProgress,
+    (value) => value * 100 + "%"
+  );
   return (
-    <div className="w-full h-full fixed left-12 bottom-full bg-orange-300">
-      <motion.div className="absolute h-[9999px] bg-green-700 w-24" initial={{translateY:'100%'}}>
-        s
+    <div className="fixed top-0 left-4 w-[5px] h-screen">
+      <motion.div
+        id="div-1"
+        className="absolute top-0 left-[2px] bg-primary w-[1px] h-screen origin-top"
+        style={{ scaleY: scrollYProgress }}
+      />
+      <motion.div className={`absolute`} style={{ top: topPosition }}>
+        <motion.div
+          className={`absolute top-0 left-[2px] bg-primary w-[1px] origin-top`}
+          style={{ height: HEADER_HEIGHT }}
+        />
+        <motion.div
+          className={`absolute bg-primary top-[80px] -translate-y-[5px] w-[5px] h-[5px] rounded-full`}
+          style={{ top: HEADER_HEIGHT }}
+        />
       </motion.div>
     </div>
   );
