@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  .header-h {
+    height: 5rem;
+  }
+  /* HeaderのHeight分PTで下げる */
+  .main-pt {
+    padding-top: 5rem;
+  }
+  /* HeaderのHeightを抜いた最大スクリーンHeight */
+  .min-h-screen-without-header {
+    height: calc(100vh - 5rem);
+  }
+
   /* スクロールバーを非表示 */
   html,
   body {

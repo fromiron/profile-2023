@@ -9,7 +9,7 @@ const ScrollProgressBar = () => {
     (value) => value * 100 + "%"
   );
   return (
-    <div className="fixed top-0 left-4 w-[5px] h-screen">
+    <div className="fixed top-0 left-4 w-[5px] z-50 h-screen">
       <motion.div
         id="div-1"
         className="absolute top-0 left-[2px] bg-primary w-[1px] h-screen origin-top"

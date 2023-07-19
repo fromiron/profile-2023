@@ -4,6 +4,7 @@ import ScrollProgressBar from "@/components/ui/scroll-progress-bar";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
+import { FONT_JP } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,10 +14,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ja">
-      <body>
+      <body className={FONT_JP}>
         <ScrollProgressBar />
         <Header />
-        <main className="container max-w-screen-xl h-[9999px]">{children}</main>
+        <main className="container max-w-screen-xl main-pt">{children}</main>
         <Footer />
       </body>
     </html>
