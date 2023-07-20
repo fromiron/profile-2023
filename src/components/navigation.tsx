@@ -59,7 +59,7 @@ const NavItem = ({
 }) => {
   return (
     <li>
-      <a href={url} className={`transition-all duration-500 ${selected ? "font-semibold" : ""}`}>
+      <a href={url} className={`transition-all duration-500 ${selected ? "font-medium text-primary" : ""} select-none hover:text-primary`}>
         {text}
       </a>
     </li>
