@@ -81,7 +81,7 @@ export default function SkillSection() {
       <div className={`${FONT_EN} mb-24 w-full relative`}>
         <div className="font-thin absolute -top-7 left-1/4 text-xl">i use</div>
         <div
-          className="text-7xl lg:text-9xl font-light mb-4 text-center relative"
+          className="text-6xl lg:text-9xl font-light mb-4 text-center relative"
           style={{ color: selected.color }}
         >
           {selected.name}
