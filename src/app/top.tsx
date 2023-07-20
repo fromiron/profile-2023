@@ -26,7 +26,9 @@ export default function TopSection() {
       >
         <div>i’m a</div>
         <div className="font-normal text-6xl lg:text-8xl flex items-center">
-          <div className="h-4 w-4 rounded-full bg-primary -mb-4 ml-2 mr-4" />
+          <div className="h-4 w-4 rounded-full bg-primary -mb-4 ml-2 mr-4 relative">
+            <div className="absolute h-[1px] -z-10 w-[600px] -rotate-45 bg-gray-light -left-40 top-1/2" />
+          </div>
           <WavyText text={text} duration={0.1} delay={0.02} />
         </div>
         <div>web developer</div>
