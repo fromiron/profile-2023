@@ -30,6 +30,7 @@ export default function AboutSection() {
             delay={0.2}
             duration={0.3}
             play={play}
+            extraStyles="font-light"
           />
         </div>
         <div className="relative -z-10 translate-x-1/3 translate-y-10 select-none">

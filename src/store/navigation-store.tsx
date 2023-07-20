@@ -7,6 +7,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { text: "top", url: "/#top" },
   { text: "about", url: "/#about" },
+  { text: "skill", url: "/#skill" },
   { text: "work", url: "/#work" },
   { text: "hire me!", url: "/#contact" },
 ];

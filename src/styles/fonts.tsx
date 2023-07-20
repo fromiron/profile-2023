@@ -7,7 +7,7 @@ const NOTO_SANS_JP = Noto_Sans_JP({
 });
 
 const OUTFIT = Outfit({
-  weight: ["200", "300", "400"],
+  weight: ["100", "200", "300", "400"],
   subsets: ["latin"],
   display: "swap",
 });
