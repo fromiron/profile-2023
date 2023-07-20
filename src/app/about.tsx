@@ -20,11 +20,13 @@ export default function AboutSection() {
       id="about"
       className="relative font-light flex flex-col items-center justify-center"
     >
-      <div className="break-keep text-8xl lg:text-[240px] text-gray-light">
+      <div className="break-keep text-8xl lg:text-[240px] text-gray-light w-fit">
         <div className="relative -z-10 -translate-x-1/3 -translate-y-10 select-none">
           こんにちは
         </div>
-        <div className={`text-primary text-5xl lg:text-6xl text-center ${FONT_EN}`}>
+        <div
+          className={`text-primary text-5xl lg:text-6xl text-center ${FONT_EN}`}
+        >
           <TypingText
             text="“Hello, Japan!”"
             delay={0.2}

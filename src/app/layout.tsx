@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ja" className="scroll-smooth">
+    <html lang="ja" className="scroll-smooth w-full overflow-x-hidden">
       <body className={FONT_JP}>
         <ScrollProgressBar />
         <Header />
-        <main className="container max-w-screen-xl">{children}</main>
+        <main className="container overflow-x-hidden lg:overflow-x-visible max-w-screen-xl">{children}</main>
         <Footer />
       </body>
     </html>

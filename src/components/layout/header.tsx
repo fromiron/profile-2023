@@ -7,8 +7,10 @@ export const HEADER_HEIGHT = "80px";
 
 const Header = () => {
   return (
-    <header className={`fixed w-full ${FONT_EN} header-h z-40`}>
-      <nav className="flex justify-between items-center bg-background h-full w-full max-w-screen-xl mx-auto px-8">
+    <header
+      className={`fixed ${FONT_EN} py-4 bg-background left-0 right-0 header-h z-40`}
+    >
+      <nav className="flex flex-col lg:flex-row justify-between items-center h-full max-w-screen-xl mx-auto px-8">
         <Link href="/" className="cursor-pointer">
           <Logo />
         </Link>

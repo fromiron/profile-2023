@@ -4,12 +4,12 @@
 
 @layer base {
   .header-h {
-    height: 5rem;
+    height: 7rem;
   }
   /* HeaderのHeight分PTで下げるHeaderのHeightを抜いた最大スクリーンHeight */
   section {
-    min-height: calc(100vh - 5rem);
-    padding-top: 5rem;
+    min-height: calc(100vh - 7rem);
+    padding-top: 7rem;
   }
 
   /* スクロールバーを非表示 */
