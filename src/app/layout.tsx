@@ -5,6 +5,8 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 import { FONT_JP } from "@/styles/fonts";
+import Providers from "./providers";
+import ThemeSelector from "@/components/ui/theme-selector";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,12 +15,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ja" className="scroll-smooth w-full overflow-x-hidden">
+    <html
+      lang="ja"
+      className="scroll-smooth w-full overflow-x-hidden"
+      suppressHydrationWarning={true}
+    >
       <body className={FONT_JP}>
-        <ScrollProgressBar />
-        <Header />
-        <main className="container overflow-x-hidden lg:overflow-x-visible max-w-screen-xl">{children}</main>
-        <Footer />
+        <Providers>
+          <ThemeSelector />
+
+          <ScrollProgressBar />
+          <Header />
+
+          <main className="container overflow-x-hidden lg:overflow-x-visible max-w-screen-xl">
+            {children}
+          </main>
+
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

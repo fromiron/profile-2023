@@ -28,6 +28,9 @@ module.exports = {
           light: "#F9F9F9",
           dark: "#A6A6A6",
         },
+        black:{
+          DEFAULT: "#020202",
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

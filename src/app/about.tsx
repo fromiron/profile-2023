@@ -20,7 +20,7 @@ export default function AboutSection() {
       id="about"
       className="relative font-light flex flex-col items-center justify-center"
     >
-      <div className="break-keep text-8xl lg:text-[240px] text-gray-light w-fit">
+      <div className="break-keep text-8xl lg:text-[240px] text-gray-light dark:text-opacity-10 w-fit">
         <div className="relative -z-10 -translate-x-1/3 -translate-y-10 select-none">
           こんにちは
         </div>

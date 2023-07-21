@@ -27,7 +27,7 @@ const SKILLS: Skill[] = [
   {
     name: "Next.js",
     image: "/nextjs.png",
-    color: "#212121",
+    color: "#343434",
     message: "React framework for server rendering.",
   },
   {
@@ -85,7 +85,7 @@ export default function SkillSection() {
           style={{ color: selected.color }}
         >
           {selected.name}
-          <div className="absolute h-[1px] -z-10 w-[600px] -rotate-45 bg-gray left-1/2 -translate-x-1/2 top-1/2" />
+          <div className="absolute h-[1px] -z-10 w-[600px] -rotate-45 bg-gray dark:opacity-20 left-1/2 -translate-x-1/2 top-1/2" />
 
         </div>
         <div className="font-thin text-center">{selected.message}</div>
