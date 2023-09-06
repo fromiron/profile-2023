@@ -10,7 +10,7 @@ const ScrollProgressBar = () => {
   );
 
   return (
-    <div className="fixed top-0 left-4 w-[5px] z-[9999] h-screen">
+    <div className="fixed top-0 left-4 w-[5px] z-[9998] h-screen">
       <motion.div
         className="absolute top-0 left-[2px] bg-primary w-[1px] h-screen origin-top"
         style={{ scaleY: scrollYProgress }}
