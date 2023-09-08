@@ -27,6 +27,7 @@ const ImageSlider = ({ images }: { images: string[] }) => {
             dragConstraints={{ left: 0, right: 0 }}
             onDragStart={(_, info) => setStartX(info.offset.x)}
             onDragEnd={(_, info) => changeIndex(info.offset.x)}
+            onClick={() => setIndex(i+1)}
             key={i}
             className={"absolute inset-0 w-full h-full origin-bottom-right"}
             animate={{
