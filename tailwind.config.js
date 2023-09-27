@@ -28,7 +28,7 @@ module.exports = {
           light: "#F9F9F9",
           dark: "#A6A6A6",
         },
-        black:{
+        black: {
           DEFAULT: "#020202",
         },
         secondary: {
@@ -77,5 +77,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
