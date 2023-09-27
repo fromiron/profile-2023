@@ -1,78 +1,122 @@
-import {
-  ComputedFields,
-  defineDocumentType,
-  makeSource,
-} from "contentlayer/source-files";
+import { defineDocumentType, makeSource } from "contentlayer/source-files";
+
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
-import rehypeSlug from "rehype-slug/lib";
-import remarkGfm from "remark-gfm";
-import { UnistNode, UnistTree } from "@/types/unist";
+import readingTime from "reading-time";
+import GithubSlugger from "github-slugger";
 
-const computedFields: ComputedFields = {
-  slug: {
-    type: "string",
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
-  },
-  slugAsParams: {
-    type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
-  },
-};
+export interface Work {
+  title: string;
+  image: string;
+  description: string;
+  images: string[];
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  isPublished: boolean;
+  url: string;
+}
 
-export const Doc = defineDocumentType(() => ({
-  name: "Doc",
-  filePathPattern: `docs/**/*.mdx`,
+export const Works = defineDocumentType(() => ({
+  name: "Works",
+  filePathPattern: `**/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
       required: true,
     },
+    image: {
+      type: "string",
+      required: true,
+    },
     description: {
       type: "string",
+      required: true,
     },
-    published: {
+    author: {
+      type: "string",
+      required: true,
+    },
+    images: {
+      type: "list",
+      of: {
+        type: "string",
+      },
+      required: false,
+    },
+    tags: {
+      type: "list",
+      of: {
+        type: "string",
+      },
+      required: false,
+    },
+    createdAt: {
+      type: "date",
+      required: true,
+    },
+    updatedAt: {
+      type: "date",
+      required: true,
+    },
+    publishedAt: {
+      type: "date",
+      required: true,
+    },
+    isPublished: {
       type: "boolean",
-      default: true,
+      required: true,
     },
   },
-  computedFields,
+  computedFields: {
+    url: {
+      type: "string",
+      resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    },
+    readingTime: {
+      type: "json",
+      resolve: (doc) => readingTime(doc.body.raw),
+    },
+    toc: {
+      type: "json",
+      resolve: async (doc) => {
+        const regularExp = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+        const slugger = new GithubSlugger();
+        return Array.from(doc.body.raw.matchAll(regularExp)).map(
+          ({ groups }) => {
+            const flag = groups?.flag;
+            const content = groups?.content;
+            return {
+              level:
+                flag?.length == 1 ? "one" : flag?.length == 2 ? "two" : "three",
+              text: content,
+              slug: content ? slugger.slug(content) : undefined,
+            };
+          },
+        );
+      },
+    },
+  },
 }));
 
+const codeOptions = {
+  theme: "github-dark",
+  grid: false,
+};
+
 export default makeSource({
-  contentDirPath: "./content",
-  documentTypes: [Doc],
+  contentDirPath: "content",
+  documentTypes: [Works],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      [
-        rehypePrettyCode,
-        {
-          theme: "github-dark",
-          onVisitLine(node: UnistTree) {
-            if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }];
-            }
-          },
-          onVisitHighlightedLine(node: UnistNode) {
-            node.properties?.className?.push("line--highlighted");
-          },
-          onVisitHighlightedWord(node: UnistNode) {
-            node.properties?.className?.push("word--highlighted");
-          },
-        },
-      ],
-      [
-        rehypeAutolinkHeadings,
-        {
-          properties: {
-            className: ["subheading-anchor"],
-            ariaLabel: "Link to section",
-          },
-        },
-      ],
+      [rehypeAutolinkHeadings, { behavior: "append" }],
+      [rehypePrettyCode, codeOptions],
     ],
   },
 });
