@@ -33,15 +33,4 @@ function Badge({ className, variant, ...props }: BadgeProps) {
   );
 }
 
-function DesignBadge() {
-  return <Badge variant="default">Design</Badge>;
-}
-
-function BackendBadge() {
-  return <Badge variant="default">Backend</Badge>;
-}
-
-function FrontendBadge() {
-  return <Badge variant="default">Frontend</Badge>;
-}
-export { Badge, badgeVariants, DesignBadge, BackendBadge, FrontendBadge };
+export { Badge, badgeVariants };

@@ -1,24 +1,38 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import ImageWrapper from "./image-wrapper";
-import ArrowText from "./arrow-text";
-import { FONT_EN } from "@/styles/fonts";
 
-const ImageSlider = ({ images }: { images: string[] }) => {
-  const [index, setIndex] = useState(0);
+interface ImageSliderProps {
+  images: string[];
+  setIndex: (index: number) => void;
+  index: number;
+}
+
+const ImageSlider = ({ images, setIndex, index }: ImageSliderProps) => {
   const [startX, setStartX] = useState(0);
 
-  const changeIndex = (endX: number) => {
+  const changeIndexFromDrag = (endX: number) => {
     if (startX + 100 < endX) {
+      if (index >= images.length) {
+        setIndex(0);
+        return;
+      }
       setIndex((index + 1) % images.length);
     }
   };
+  const changeIndexFromClick = (selectedIndex: number) => {
+    if (selectedIndex >= images.length) {
+      setIndex(0);
+      return;
+    }
+    setIndex(selectedIndex);
+  };
 
   return (
-    <div className={`relative group`}>
+    <div className={`relative group mt-8`}>
       {images.map((image, i) => {
         const distance = (i - index + images.length) % images.length;
-        const x = distance * 30;
+        const x = distance * 10;
         const scale = 1 - distance * 0.2;
         const rotate = distance * 4;
         return (
@@ -26,8 +40,8 @@ const ImageSlider = ({ images }: { images: string[] }) => {
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             onDragStart={(_, info) => setStartX(info.offset.x)}
-            onDragEnd={(_, info) => changeIndex(info.offset.x)}
-            onClick={() => setIndex(i+1)}
+            onDragEnd={(_, info) => changeIndexFromDrag(info.offset.x)}
+            onClick={() => changeIndexFromClick(i + 1)}
             key={i}
             className={"absolute inset-0 w-full h-full origin-bottom-right"}
             animate={{
