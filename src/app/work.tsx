@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { allWorks } from "@/contentlayer/generated";
 import { FONT_EN } from "@/styles/fonts";
 import { Button } from "@/components/ui/button";
+import DocumentAnimation from "@/components/animations/document-animation";
 
 const WORK_DISPLAY_LIMIT = 5;
 
@@ -24,14 +25,14 @@ export default function WorkSection() {
 
   return (
     <section ref={targetRef} id="work">
-      <div className="w-full flex flex-col justify-center py-10 lg:py-20">
+      <div className="flex w-full flex-col justify-center py-10 lg:py-20">
         <div>私はこういうことができます。</div>
         <Button variant="outline" size={"lg"}>
           ワークページから詳しくみる
         </Button>
       </div>
-      <div className="mt-10 grid max-w-sm md:max-w-full mx-auto grid-cols-1 lg:grid-cols-2  justify-center">
-        <div className="w-full aspect-square max-w-sm mx-auto">
+      <div className="mx-auto mt-10 grid max-w-sm grid-cols-1 justify-center md:max-w-full  lg:grid-cols-2">
+        <div className="mx-auto aspect-square w-full max-w-sm">
           <ImageSlider images={mainImages} setIndex={setIndex} index={index} />
         </div>
         <Description
@@ -41,6 +42,7 @@ export default function WorkSection() {
         />
       </div>
       {/* TODO　ワークページに移動するボタンデザイン */}
+      <DocumentAnimation />
     </section>
   );
 }
@@ -53,8 +55,8 @@ interface DescriptionProps {
 function Description({ title, tags, description }: DescriptionProps) {
   return (
     <div className="mt-12">
-      <div className="font-bold text-4xl mb-4 text-primary">{title}</div>
-      <div className="flex gap-2 w-full">
+      <div className="mb-4 text-4xl font-bold text-primary">{title}</div>
+      <div className="flex w-full gap-2">
         {tags?.map((tag) => (
           <Badge variant="default" className={FONT_EN} key={tag}>
             {tag}

@@ -26,15 +26,15 @@ const Navigation = () => {
   }, [activeLink, navItems]);
 
   return (
-    <ul className="flex relative gap-x-4 lg:gap-x-8" ref={navContainerRef}>
+    <ul className="relative flex gap-x-4 lg:gap-x-8" ref={navContainerRef}>
       <motion.div
         id="nav-acc"
-        className="absolute flex bottom-[40%] h-[1px] bg-primary"
+        className="absolute bottom-[40%] flex h-[1px] bg-primary"
         initial={false}
         animate={{ width: accWidth }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
-        <div className="absolute right-0 -top-[2px] h-[5px] w-[5px] rounded-full bg-primary" />
+        <div className="absolute -top-[2px] right-0 h-[5px] w-[5px] rounded-full bg-primary" />
       </motion.div>
       {navItems.map((item) => (
         <NavItem
@@ -61,7 +61,7 @@ const NavItem = ({
     <li>
       <a
         href={url}
-        className={`transition-all duration-500 text-xl ${
+        className={`text-xl transition-all duration-500 ${
           selected ? "font-medium text-primary" : ""
         } select-none hover:text-primary`}
       >
