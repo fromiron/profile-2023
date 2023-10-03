@@ -22,7 +22,7 @@ export interface Work {
 
 export const Works = defineDocumentType(() => ({
   name: "Works",
-  filePathPattern: `**/**/*.mdx`,
+  filePathPattern: `**/works/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
@@ -103,6 +103,35 @@ export const Works = defineDocumentType(() => ({
   },
 }));
 
+export interface Category {
+  title: string;
+  image: string;
+  tags: string[];
+}
+
+export const Categories = defineDocumentType(() => ({
+  name: "Categories",
+  filePathPattern: `**/categories/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    image: {
+      type: "string",
+      required: true,
+    },
+    tags: {
+      type: "list",
+      of: {
+        type: "string",
+      },
+      required: true,
+    },
+  },
+}));
+
 const codeOptions = {
   theme: "github-dark",
   grid: false,
@@ -110,7 +139,7 @@ const codeOptions = {
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Works],
+  documentTypes: [Works, Categories],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
