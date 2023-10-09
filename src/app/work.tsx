@@ -2,14 +2,13 @@
 import ImageSlider from "@/components/ui/image-slider";
 import useViewportAction from "@/hooks/useViewportAction";
 import useNavigationStore from "@/store/navigation-store";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { allWorks } from "@/contentlayer/generated";
+import { allCategories } from "@/contentlayer/generated";
 import { FONT_EN } from "@/styles/fonts";
-import { Button } from "@/components/ui/button";
-import DocumentAnimation from "@/components/animations/document-animation";
+import MdxRenderer from "@/components/mdx-renderer";
 
-const WORK_DISPLAY_LIMIT = 5;
+const DISPLAY_LIMIT = 5;
 
 export default function WorkSection() {
   const [index, setIndex] = useState(0);
@@ -19,30 +18,20 @@ export default function WorkSection() {
     setActiveLink("/#work");
   };
   useViewportAction({ callback: onViewportEnter, ref: targetRef });
-  const limitedWorks = allWorks.slice(0, WORK_DISPLAY_LIMIT);
-  const mainImages = limitedWorks.map((work) => work.image);
-  const work = allWorks[index];
+  const limited = allCategories.slice(0, DISPLAY_LIMIT);
+  const mainImages = limited.map((c) => c.image);
+  const { title, tags, body } = allCategories[index];
 
   return (
     <section ref={targetRef} id="work">
-      <div className="flex w-full flex-col justify-center py-10 lg:py-20">
-        <div>私はこういうことができます。</div>
-        <Button variant="outline" size={"lg"}>
-          ワークページから詳しくみる
-        </Button>
-      </div>
       <div className="mx-auto mt-10 grid max-w-sm grid-cols-1 justify-center md:max-w-full  lg:grid-cols-2">
         <div className="mx-auto aspect-square w-full max-w-sm">
           <ImageSlider images={mainImages} setIndex={setIndex} index={index} />
         </div>
-        <Description
-          title={work.title}
-          tags={work.tags}
-          description={work.description}
-        />
+        <Description title={title} tags={tags}>
+          <MdxRenderer body={body} />
+        </Description>
       </div>
-      {/* TODO　ワークページに移動するボタンデザイン */}
-      <DocumentAnimation />
     </section>
   );
 }
@@ -50,9 +39,9 @@ export default function WorkSection() {
 interface DescriptionProps {
   title: string;
   tags?: string[];
-  description: string;
+  children: React.ReactNode;
 }
-function Description({ title, tags, description }: DescriptionProps) {
+function Description({ title, tags, children }: DescriptionProps) {
   return (
     <div className="mt-12">
       <div className="mb-4 text-4xl font-bold text-primary">{title}</div>
@@ -63,7 +52,7 @@ function Description({ title, tags, description }: DescriptionProps) {
           </Badge>
         ))}
       </div>
-      <div className="mt-8">{description}</div>
+      <div className="mt-8">{children}</div>
     </div>
   );
 }

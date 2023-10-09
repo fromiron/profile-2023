@@ -7,10 +7,10 @@ const mdxComponents = {
   Image,
 };
 
-const MdxRenderer = ({ mdx }: { mdx: any }) => {
-  const MDXContent = useMDXComponent(mdx.body.code);
+const MdxRenderer = ({ mdx, body }: { mdx?: any; body?: any }) => {
+  const MDXContent = useMDXComponent(body ? body.code : mdx.body.code);
   return (
-    <div className="prose col-span-12 max-w-max sm:prose-base md:prose-lg first-letter:text-3xl sm:first-letter:text-5xl lg:col-span-8">
+    <div className="prose col-span-12 max-w-max dark:prose-invert sm:prose-base md:prose-lg lg:col-span-8">
       <MDXContent components={mdxComponents} />
     </div>
   );
