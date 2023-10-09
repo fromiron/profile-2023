@@ -21,7 +21,7 @@ export interface Work {
 }
 
 export const Works = defineDocumentType(() => ({
-  name: "Works",
+  name: "Work",
   filePathPattern: `**/works/*.mdx`,
   contentType: "mdx",
   fields: {
@@ -110,7 +110,7 @@ export interface Category {
 }
 
 export const Categories = defineDocumentType(() => ({
-  name: "Categories",
+  name: "Category",
   filePathPattern: `**/categories/*.mdx`,
   contentType: "mdx",
   fields: {
