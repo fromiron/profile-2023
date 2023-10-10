@@ -3,14 +3,13 @@ import Image from "next/image";
 import MdxRenderer from "@/components/mdx-renderer";
 import { notFound } from "next/navigation";
 import META_DATA from "@/constants/metaData";
-import textSplitter from "@/lib/textSlicer";
 
 export async function generateStaticParams() {
-  return allWorks.map((work) => ({ slug: work._raw.flattenedPath }));
+  return allWorks.map((work) => ({ slug: work.url }));
 }
 
 export async function generateMetadata({ params }: any) {
-  const work = allWorks.find((work) => work._raw.flattenedPath === params.slug);
+  const work = allWorks.find((work) => work.url === params.slug);
   if (!work) {
     return;
   }
@@ -57,7 +56,7 @@ export async function generateMetadata({ params }: any) {
 
 async function getMarkdownFromSlug(slug: string) {
   const work = allWorks.find(
-    (work) => work._raw.flattenedPath.replace("works/", "") === slug,
+    (work) => work.url.replace("/works/", "") === slug,
   );
   if (!work) {
     notFound();
@@ -70,6 +69,7 @@ interface PageProps {
 }
 export default async function WorkPage({ params: { slug } }: PageProps) {
   const work = await getMarkdownFromSlug(slug);
+  console.log(slug);
 
   return (
     <section>

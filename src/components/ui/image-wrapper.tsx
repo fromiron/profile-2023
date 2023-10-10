@@ -5,7 +5,7 @@ const ImageWrapper = ({ src }: { src: string }) => {
         viewBox="0 0 442 431"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="transition cursor-pointer hover:drop-shadow-xl active:scale-105 focus:scale-105 hover:scale-105"
+        className="cursor-pointer transition hover:scale-105 hover:drop-shadow-xl focus:scale-105 active:scale-105"
       >
         <defs>
           <mask id="image-mask">

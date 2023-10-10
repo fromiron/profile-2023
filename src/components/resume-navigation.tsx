@@ -1,6 +1,6 @@
 "use client";
 
-import useNavigationStore, { NavMenu } from "@/store/navigation-store";
+import { NavMenu } from "@/store/navigation-store";
 import { motion } from "framer-motion";
 import { useLayoutEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -10,7 +10,7 @@ import Link from "next/link";
 const ResumeNavigation = () => {
   const navContainerRef = useRef<HTMLUListElement | null>(null);
   const [accWidth, setAccWidth] = useState(0);
-  const pathname = usePathname().replace("/", "");
+  const pathname = usePathname().replace("/", "").split("/")[0];
   const navItems = useMemo(() => ["resume", "works"], []);
 
   useLayoutEffect(() => {
@@ -43,7 +43,7 @@ const ResumeNavigation = () => {
           key={item}
           text={item}
           selected={pathname === item}
-          url={item as NavMenu}
+          url={item}
         />
       ))}
     </ul>
@@ -57,12 +57,12 @@ const NavItem = ({
 }: {
   text: string;
   selected: boolean;
-  url: NavMenu;
+  url: string;
 }) => {
   return (
     <li>
       <Link
-        href={url}
+        href={`/${url}`}
         className={`text-xl transition-all duration-500 ${
           selected ? "font-medium text-primary" : ""
         } select-none hover:text-primary`}

@@ -1,11 +1,6 @@
 "use client";
 import documentAnimation from "@/lottie/document-animation.json";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { useLottie } from "lottie-react";
-const style = {
-  height: 300,
-};
-
 import { useRef } from "react";
 
 export default function DocumentAnimation() {
