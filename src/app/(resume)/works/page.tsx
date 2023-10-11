@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import ImageWrapper from "@/components/ui/image-wrapper";
+
 import { Work, allWorks } from "@/contentlayer/generated";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import PostCard from "@/components/ui/post-card";
+import TagItem from "@/components/ui/tag-item";
 
 export default function WorksPage() {
   const publishedWorks = allWorks
@@ -34,57 +34,61 @@ export default function WorksPage() {
     setFilteredWorks(
       publishedWorks.filter((work) => work?.tags?.includes(selectedTag)),
     );
-  }, [publishedWorks, selectedTag]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTag]);
 
   if (
     publishedWorks?.length === 0 ||
     !publishedWorks ||
     !filteredWorks ||
     filteredWorks?.length === 0
-  )
-    return (
-      <section>
-        <div className="text-primary">no works found</div>
-      </section>
-    );
-  if (!publishedWorks)
-    return <div className="text-primary">no works found</div>;
-  if (filteredWorks.length === 0)
-    return <div className="text-primary">no works found</div>;
-  const tags = [
-    ...new Set(publishedWorks.map((work: Work) => work.tags).flat()),
-  ];
+  ) {
+    return <NotFound />;
+  }
+
+  const tagCount: { [key: string]: number } = publishedWorks.reduce(
+    (accumulator: { [key: string]: number }, work) => {
+      if (work.tags) {
+        work.tags.forEach((tag: string) => {
+          accumulator[tag] = (accumulator[tag] || 0) + 1;
+        });
+      }
+      return accumulator;
+    },
+    {},
+  );
 
   return (
     <section>
-      <ul className="mb-8 flex gap-x-4">
-        {tags.length > 0 &&
-          tags.map((tag, i) => (
-            <li key={`tag${i}`}>
-              <Button
-                variant={`${selectedTag === tag ? "default" : "outline"}`}
-                size={"sm"}
-                onClick={() => handleTag(tag ?? "")}
-              >
-                {tag}
-              </Button>
-            </li>
-          ))}
-      </ul>
-      <ul className="grid grid-cols-12 gap-x-8 gap-y-12">
-        {filteredWorks.map((work: Work) => (
-          <li key={work.url} className="col-span-12 lg:col-span-4">
-            <Link href={work.url}>
-              <div className="relative aspect-square">
-                <ImageWrapper src={work.image} />
-              </div>
-              <h3>{work.title}</h3>
-              <p>{work.description}</p>
-              <p>{work.readingTime.text}</p>
-            </Link>
-          </li>
+      <ul className="-mx-2 mb-8 border-b pb-4">
+        {Object.entries(tagCount).map(([tag, count]) => (
+          <TagItem
+            key={tag}
+            count={count}
+            tag={tag}
+            selectedTag={selectedTag}
+            handleTag={() => handleTag(tag ?? "all")}
+          />
         ))}
       </ul>
+      <ul className="grid grid-cols-6 gap-x-8 gap-y-12">
+        {filteredWorks.map((work: Work, i) => (
+          <PostCard
+            key={work._id}
+            work={work}
+            isBig={i === 0}
+            showAccBlock={i === 1}
+          />
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function NotFound() {
+  return (
+    <section>
+      <div className="text-primary">no works found</div>
     </section>
   );
 }
