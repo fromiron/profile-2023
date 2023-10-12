@@ -1,9 +1,9 @@
-import { Work } from "@/contentlayer/generated";
 import textSplitter from "@/lib/textSlicer";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../svg/logo";
 import { Badge } from "./badge";
+import { Work } from "contentlayer/generated";
 
 export default function PostCard({
   work,

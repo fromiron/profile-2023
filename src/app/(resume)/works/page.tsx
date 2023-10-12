@@ -1,9 +1,9 @@
 "use client";
 
-import { Work, allWorks } from "@/contentlayer/generated";
 import { useEffect, useState } from "react";
 import PostCard from "@/components/ui/post-card";
 import TagItem from "@/components/ui/tag-item";
+import { Work, allWorks } from "contentlayer/generated";
 
 export default function WorksPage() {
   const publishedWorks = allWorks

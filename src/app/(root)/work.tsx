@@ -4,7 +4,6 @@ import useViewportAction from "@/hooks/useViewportAction";
 import useNavigationStore from "@/store/navigation-store";
 import React, { useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { allCategories } from "@/contentlayer/generated";
 import { FONT_EN } from "@/styles/fonts";
 import MdxRenderer from "@/components/mdx-renderer";
 import { Button } from "@/components/ui/button";
@@ -16,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { allCategories } from "contentlayer/generated";
 
 const DISPLAY_LIMIT = 5;
 

@@ -1,8 +1,8 @@
-import { allWorks } from "@/contentlayer/generated";
 import Image from "next/image";
 import MdxRenderer from "@/components/mdx-renderer";
 import { notFound } from "next/navigation";
 import META_DATA from "@/constants/metaData";
+import { allWorks } from "contentlayer/generated";
 
 export async function generateStaticParams() {
   return allWorks.map((work) => ({ slug: work.url }));
