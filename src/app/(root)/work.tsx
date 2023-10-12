@@ -32,22 +32,26 @@ export default function WorkSection() {
   const { title, tags, body } = allCategories[index];
 
   return (
-    <section ref={targetRef} id="work">
+    <section
+      ref={targetRef}
+      id="work"
+      className="flex items-center justify-center"
+    >
       <div className="mx-auto mt-10 grid max-w-sm grid-cols-1 justify-center md:max-w-full  lg:grid-cols-2">
         <div className="mx-auto aspect-square w-full max-w-sm">
           <ImageSlider images={mainImages} setIndex={setIndex} index={index} />
         </div>
         <Description title={title} tags={tags}>
-          <MdxRenderer body={body} />
+          <MdxRenderer code={body.code} />
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger className="mt-8 w-full">
-                <Link href="/works" target="_blank" className="mt-8">
-                  <Button variant={"ghost"} className="w-full" slot="button">
+                <Button variant={"ghost"} className="w-full" asChild>
+                  <Link href="/works" target="_blank">
                     <HiMiniArrowTopRightOnSquare className="h-4 w-4" />
                     <span className={`${FONT_EN} ml-2`}>View All Works</span>
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </TooltipTrigger>
               <TooltipContent className="px-8 text-lg shadow-md">
                 <p>別のタブで開きます</p>

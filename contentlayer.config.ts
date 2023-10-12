@@ -2,10 +2,14 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import readingTime from "reading-time";
 import GithubSlugger from "github-slugger";
+import rehypeCodeTitles from "rehype-code-titles";
+import rehypePrism from "rehype-prism-plus";
+import rehypeExternalLink from "rehype-external-links";
+import rehypeShiftHeading from "rehype-shift-heading";
+import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
 export interface Work {
   title: string;
@@ -40,13 +44,6 @@ export const Works = defineDocumentType(() => ({
     author: {
       type: "string",
       required: true,
-    },
-    images: {
-      type: "list",
-      of: {
-        type: "string",
-      },
-      required: false,
     },
     tags: {
       type: "list",
@@ -144,7 +141,11 @@ export default makeSource({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: "append" }],
+      rehypeCodeTitles,
+      rehypePrism,
+      rehypeAccessibleEmojis,
+      [rehypeShiftHeading, { shift: 1 }],
+      [rehypeExternalLink, { target: "_blank", rel: ["noopener"] }],
       [rehypePrettyCode, codeOptions],
     ],
   },

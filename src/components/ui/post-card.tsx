@@ -34,8 +34,8 @@ export default function PostCard({
           <div className="group relative aspect-square overflow-hidden rounded-lg">
             <Image
               src={work.image}
-              width={300}
-              height={300}
+              width={isBig ? 800 : 400}
+              height={isBig ? 800 : 400}
               alt={work.title}
               className="h-full w-full transform object-cover object-center transition duration-500 ease-in-out group-hover:scale-105 group-hover:drop-shadow-xl group-focus:scale-105 group-active:scale-105"
             />

@@ -3,6 +3,7 @@ import MdxRenderer from "@/components/mdx-renderer";
 import { notFound } from "next/navigation";
 import META_DATA from "@/constants/metaData";
 import { allWorks } from "contentlayer/generated";
+import { Badge } from "@/components/ui/badge";
 
 export async function generateStaticParams() {
   return allWorks.map((work) => ({ slug: work.url }));
@@ -69,37 +70,51 @@ interface PageProps {
 }
 export default async function WorkPage({ params: { slug } }: PageProps) {
   const work = await getMarkdownFromSlug(slug);
-  console.log(slug);
 
   return (
     <section>
       <article>
-        <div className="group relative flex h-[50vh] w-full items-center justify-center">
-          <h1 className="absolute z-50 mx-4 flex h-auto items-center justify-center overflow-hidden rounded-lg bg-primary-foreground px-12 py-8 text-4xl font-medium transition-all">
-            {work?.title}
-            <div className="absolute left-4 top-4 -z-10 aspect-square h-4 w-4 rounded-full bg-primary" />
-          </h1>
-
-          <div className="h-full w-full overflow-hidden rounded-xl border border-transparent transition duration-500 group-hover:border-primary">
-            <Image
-              src={work?.image ?? ""}
-              alt={work?.title ?? "work main image"}
-              width={400}
-              height={400}
-              className="h-full w-full object-cover object-center transition duration-500 group-hover:blur-sm group-hover:grayscale "
-              priority
-              sizes="100vw"
-            />
-            d d
+        <div className="group relative h-[30vh] w-full overflow-hidden">
+          <div className="absolute right-0 top-1/2 z-40 h-[1px] w-[600px] translate-x-1/2 -rotate-45 bg-primary dark:opacity-20" />
+          <div className="absolute bottom-[10%] z-50 mx-[5%]  rounded-lg bg-primary-foreground/30 p-10 px-[10%] shadow-sm backdrop-blur-sm md:bottom-[20%]">
+            <div className="flex items-center">
+              <div className="mr-4 h-4 w-4 rounded-full bg-primary" />
+              <h1 className="text-2xl font-medium lg:text-3xl">
+                {work?.title}
+              </h1>
+            </div>
+            <div className="mt-2">
+              {work?.tags && work.tags.length > 0
+                ? work.tags.map((tag: string) => (
+                    <Badge
+                      key={tag}
+                      variant="secondary"
+                      className="mr-2 inline text-sm text-black/60"
+                    >
+                      {tag}
+                    </Badge>
+                  ))
+                : null}
+            </div>
           </div>
+
+          <Image
+            src={work?.image ?? ""}
+            alt={work?.title ?? "work main image"}
+            width={400}
+            height={400}
+            className="h-full w-full rounded-xl border border-secondary object-cover object-center grayscale transition duration-500 hover:border-primary hover:grayscale-0"
+            priority
+            sizes="100vw"
+          />
         </div>
-        <div className="sxl:gap-16 mt-8  grid grid-cols-12 gap-y-8 px-5 md:px-10 lg:gap-8">
-          <div className="col-span-12  lg:col-span-4">
+        <div className="mt-8 grid grid-cols-12 gap-y-8 px-5 md:px-10 lg:gap-8">
+          <div className="col-span-12 lg:col-span-4">
             <details
-              className="border-dark dark:border-light text-dark dark:text-light sticky top-6 max-h-[80vh] overflow-hidden overflow-y-auto rounded-lg border-[1px] border-solid p-4"
+              className="sticky top-[7rem] max-h-[80vh] overflow-hidden overflow-y-auto rounded-lg border border-solid p-4"
               open
             >
-              <summary className="cursor-pointer text-lg font-semibold capitalize">
+              <summary className="cursor-pointer text-lg font-semibold capitalize text-primary">
                 Table Of Content
               </summary>
               <ul className="font-in mt-4 text-base">
@@ -130,7 +145,7 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
               </ul>
             </details>
           </div>
-          <MdxRenderer mdx={work} />
+          <MdxRenderer code={work.body.code} />
         </div>
       </article>
     </section>
