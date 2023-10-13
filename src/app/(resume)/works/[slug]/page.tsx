@@ -74,7 +74,7 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
   return (
     <section>
       <article>
-        <div className="group relative h-[30vh] w-full overflow-hidden">
+        <div className="group relative h-[40vh] w-full overflow-hidden">
           <div className="absolute right-0 top-1/2 z-40 h-[1px] w-[600px] translate-x-1/2 -rotate-45 bg-primary dark:opacity-20" />
           <div className="absolute bottom-[10%] z-50 mx-[5%]  rounded-lg bg-primary-foreground/30 p-10 px-[10%] shadow-sm backdrop-blur-sm md:bottom-[20%]">
             <div className="flex items-center">

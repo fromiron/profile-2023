@@ -2,23 +2,48 @@
 import React, { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
-import Heading from "./ui/heading";
 import type { MDXComponents } from "mdx/types";
+import { VscLinkExternal } from "react-icons/vsc";
 
-const createHeadingComponent = (level: number) => {
-  const HeadingComponent: React.FC<
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-  > = ({ children }) => <Heading level={level}>{children}</Heading>;
-  return HeadingComponent;
+const createStringComponent = (props: any) => {
+  return (
+    <strong className="relative">
+      <span className="font-bold" {...props} />
+      <span className="absolute bottom-0 left-0 right-0 h-2 bg-primary/40" />
+    </strong>
+  );
+};
+const createLinkComponent = (props: any) => {
+  const { children, ...rest } = props;
+  return (
+    <a {...rest} className="inline cursor-pointer select-none text-primary">
+      <span>{children}</span>
+      <VscLinkExternal className="ml-1 inline" />
+    </a>
+  );
+};
+
+const createHeadingComponent = (props: any, level: number) => {
+  const { children, ...rest } = props;
+  const HeadingLevel = `h${level}` as keyof JSX.IntrinsicElements;
+
+  return (
+    <HeadingLevel className="text-primary" {...rest}>
+      <span className="mr-2 inline-block h-3 w-3 rounded-full bg-primary" />
+      {children}
+    </HeadingLevel>
+  );
 };
 
 const components: MDXComponents = {
-  h1: createHeadingComponent(1),
-  h2: createHeadingComponent(2),
-  h3: createHeadingComponent(3),
-  h4: createHeadingComponent(4),
-  h5: createHeadingComponent(5),
-  h6: createHeadingComponent(6),
+  h1: (props: any) => createHeadingComponent(props, 1),
+  h2: (props: any) => createHeadingComponent(props, 2),
+  h3: (props: any) => createHeadingComponent(props, 3),
+  h4: (props: any) => createHeadingComponent(props, 4),
+  h5: (props: any) => createHeadingComponent(props, 5),
+  h6: (props: any) => createHeadingComponent(props, 6),
+  strong: createStringComponent,
+  a: createLinkComponent,
   img: (props: any) => (
     // eslint-disable-next-line jsx-a11y/alt-text
     <Image
