@@ -11,7 +11,7 @@ const ResumeNavigation = () => {
   const navContainerRef = useRef<HTMLUListElement | null>(null);
   const [accWidth, setAccWidth] = useState(0);
   const pathname = usePathname().replace("/", "").split("/")[0];
-  const navItems = useMemo(() => ["resume", "works"], []);
+  const navItems = useMemo(() => ["profile", "works"], []);
 
   useLayoutEffect(() => {
     function findUrlIndex(url: NavMenu) {

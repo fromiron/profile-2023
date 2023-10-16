@@ -4,12 +4,18 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
 import type { MDXComponents } from "mdx/types";
 import { VscLinkExternal } from "react-icons/vsc";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordion";
 
 const createStringComponent = (props: any) => {
   return (
     <strong className="relative">
       <span className="font-bold" {...props} />
-      <span className="absolute bottom-0 left-0 right-0 h-2 bg-primary/40" />
+      <span className="absolute bottom-0 left-0 right-0 -z-10 h-2 bg-primary/40" />
     </strong>
   );
 };
@@ -27,11 +33,22 @@ const createHeadingComponent = (props: any, level: number) => {
   const { children, ...rest } = props;
   const HeadingLevel = `h${level}` as keyof JSX.IntrinsicElements;
 
+  return <HeadingLevel {...rest}>{children}</HeadingLevel>;
+};
+const createOlComponent = (props: any) => {
+  const { children, ...rest } = props;
+
   return (
-    <HeadingLevel className="text-primary" {...rest}>
-      <span className="mr-2 inline-block h-3 w-3 rounded-full bg-primary" />
-      {children}
-    </HeadingLevel>
+    <div className="-mt-4">
+      <Accordion type="multiple">
+        <AccordionItem value="item1">
+          <AccordionTrigger />
+          <AccordionContent>
+            <ol className="text-base">{children}</ol>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
   );
 };
 
@@ -44,6 +61,8 @@ const components: MDXComponents = {
   h6: (props: any) => createHeadingComponent(props, 6),
   strong: createStringComponent,
   a: createLinkComponent,
+  ol: createOlComponent,
+  hr: () => <hr className="my-8 border-none" />,
   img: (props: any) => (
     // eslint-disable-next-line jsx-a11y/alt-text
     <Image
@@ -58,7 +77,7 @@ const components: MDXComponents = {
 const MdxRenderer = ({ code }: { code: string }) => {
   const MDXContent = useMDXComponent(code || "");
   return (
-    <div className="prose prose-stone col-span-12 max-w-max dark:prose-invert lg:col-span-8">
+    <div className="prose prose-stone col-span-12 w-full dark:prose-invert lg:col-span-8">
       <MDXContent components={components} />
     </div>
   );

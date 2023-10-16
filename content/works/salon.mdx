@@ -1,19 +1,60 @@
 ---
-title: "salon"
-image: /works/1.png
+title: "ヘアーサロンWebサイト制作"
+image: /works/salon/cover.png
 tags:
   - JavaScript
   - React.js
   - Next.js
   - Tailwind CSS
-description: "이 문서는 Contentlayer 예제입니다."
+  - Figma
+description: "ヘアーサロンOTTO UNOのWebサイトのデザインからコーディングまでを担当しました。"
 author: "JC.Lee"
+isPublished: true
 createdAt: 2023-09-08
 updatedAt: 2023-09-08
-isPublished: true
 publishedAt: 2023-09-08
 ---
 
-# 새로운 문서
+## プロジェクトの概要
+### プロジェクト基本情報
+- プロジェクト期間: **2020年11月 - 2020年12月**
+- クライアント: IT派遣会社
+- 役割: Webデザイナー
+- チーム構成: 1人
 
-이것은 Contentlayer로 처리되는 새로운 문서입니다.
+### デザインツール
+- **Figma**
+
+### 開発環境
+1. Windows 10
+2. PhpStorm
+3. Bitbucket
+
+### 使用言語/FW/ライブラリ
+- JavaScript
+- Next.js
+- Context API
+
+## 悩んだ点
+### 透明ヘッダー
+ヘッダーを透明にしたため、スクロールすると背景イメージの色によってメニューが見ずらい問題が発生しまいた。
+そのため、表示中のセクションによってヘッダーの背景色が変わるよう機能をContext APIで実装しました。
+ここて問題になったのは、スクロールイベントにキャッチして、現在のセクションを判断することでした。
+これは[**Intersection Observer API**](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)を使って解決しました。
+
+```js showLineNumbers
+const io = new IntersectionObserver(entries => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) { // 画面に表示されているセクションを判断
+                    io.unobserve(entry.target); // 画面に表示されているセクションを監視対象から外す
+                    const menuName = entry.target.id.replaceAll('-', ' ');
+                    handleScrollPosition(menuName); // context apiのstateを更新
+                }
+            });
+        },{ threshold: 0.2, rootMargin:'0px 0px -50% 0px'})
+```
+
+## 成果
+- デザインスキルの向上: グラフィックデザイン、UI/UXデザイン、カラーコーディネーションなどのスキルを磨き、デザインの質を向上させました。
+- **TailwindCSS導入**: 今後からCSS実装はTailwindCSSを使う予定だったため、比較的に簡単なこのプロジェクトで最初導入しテストしました。**TailwindCSSの初期設定からThemeの設定方法が分かるようになり、効率敵なCSS作成ができました。**
+- **モバイルレスポンシブデザイン**: TailwindCSSでのレスポンシブデザインの実装方法を身につけることができました。

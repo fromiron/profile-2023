@@ -6,7 +6,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import readingTime from "reading-time";
 import GithubSlugger from "github-slugger";
 import rehypeCodeTitles from "rehype-code-titles";
-import rehypePrism from "rehype-prism-plus";
+import rehypePrismPlus from "rehype-prism-plus";
 import rehypeExternalLink from "rehype-external-links";
 import rehypeShiftHeading from "rehype-shift-heading";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
@@ -15,7 +15,6 @@ export interface Work {
   title: string;
   image: string;
   description: string;
-  images: string[];
   tags: string[];
   createdAt: string;
   updatedAt: string;
@@ -23,6 +22,36 @@ export interface Work {
   isPublished: boolean;
   url: string;
 }
+
+export interface Profile {
+  title: string;
+  comment: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export const Profile = defineDocumentType(() => ({
+  name: "Profile",
+  filePathPattern: `**/profile/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    comment: {
+      type: "string",
+      required: true,
+    },
+    createdAt: {
+      type: "date",
+      required: true,
+    },
+    updatedAt: {
+      type: "date",
+      required: true,
+    },
+  },
+}));
 
 export const Works = defineDocumentType(() => ({
   name: "Work",
@@ -129,24 +158,24 @@ export const Categories = defineDocumentType(() => ({
   },
 }));
 
-const codeOptions = {
-  theme: "github-dark",
-  grid: false,
+const rehypeOptions = {
+  theme: "slack-dark",
+  inlineCode: true,
+  lineNumber: true,
 };
-
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Works, Categories],
+  documentTypes: [Works, Categories, Profile],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
       rehypeCodeTitles,
-      rehypePrism,
+      rehypePrismPlus,
       rehypeAccessibleEmojis,
       [rehypeShiftHeading, { shift: 1 }],
       [rehypeExternalLink, { target: "_blank", rel: ["noopener"] }],
-      [rehypePrettyCode, codeOptions],
+      [rehypePrettyCode, rehypeOptions],
     ],
   },
 });
