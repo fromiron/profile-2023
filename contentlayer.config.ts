@@ -6,7 +6,6 @@ import rehypePrettyCode from "rehype-pretty-code";
 import readingTime from "reading-time";
 import GithubSlugger from "github-slugger";
 import rehypeCodeTitles from "rehype-code-titles";
-import rehypePrismPlus from "rehype-prism-plus";
 import rehypeExternalLink from "rehype-external-links";
 import rehypeShiftHeading from "rehype-shift-heading";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
@@ -159,9 +158,7 @@ export const Categories = defineDocumentType(() => ({
 }));
 
 const rehypeOptions = {
-  theme: "slack-dark",
-  inlineCode: true,
-  lineNumber: true,
+  theme: "github-dark",
 };
 export default makeSource({
   contentDirPath: "content",
@@ -171,7 +168,6 @@ export default makeSource({
     rehypePlugins: [
       rehypeSlug,
       rehypeCodeTitles,
-      rehypePrismPlus,
       rehypeAccessibleEmojis,
       [rehypeShiftHeading, { shift: 1 }],
       [rehypeExternalLink, { target: "_blank", rel: ["noopener"] }],

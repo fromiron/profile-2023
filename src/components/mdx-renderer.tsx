@@ -1,5 +1,5 @@
 "use client";
-import React, { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
+import React from "react";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
 import type { MDXComponents } from "mdx/types";
@@ -36,7 +36,7 @@ const createHeadingComponent = (props: any, level: number) => {
   return <HeadingLevel {...rest}>{children}</HeadingLevel>;
 };
 const createOlComponent = (props: any) => {
-  const { children, ...rest } = props;
+  const { children } = props;
 
   return (
     <div className="-mt-4">

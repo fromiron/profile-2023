@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import META_DATA from "@/constants/metaData";
 import { allWorks } from "contentlayer/generated";
 import { Badge } from "@/components/ui/badge";
+import japanDate from "@/lib/japanDate";
 
 export async function generateStaticParams() {
   return allWorks.map((work) => ({ slug: work.url }));
@@ -75,39 +76,52 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
     <section>
       <article>
         <div className="group relative h-[40vh] w-full overflow-hidden">
-          <div className="absolute right-0 top-1/2 z-40 h-[1px] w-[600px] translate-x-1/2 -rotate-45 bg-primary dark:opacity-20" />
-          <div className="absolute bottom-[10%] z-50 mx-[5%]  rounded-lg bg-primary-foreground/30 p-10 px-[10%] shadow-sm backdrop-blur-sm md:bottom-[20%]">
+          <div className="absolute bottom-[10%] z-50 mx-[5%]  rounded-lg bg-primary-foreground/30 p-10 px-[10%] shadow-lg backdrop-blur-sm md:bottom-[20%]">
             <div className="flex items-center">
-              <div className="mr-4 h-4 w-4 rounded-full bg-primary" />
-              <h1 className="text-2xl font-medium lg:text-3xl">
+              <div className="mr-4 aspect-square w-4 rounded-full bg-primary" />
+              <h1 className="text-3xl font-bold text-black lg:text-4xl">
                 {work?.title}
               </h1>
             </div>
-            <div className="mt-2">
+            <div className="mt-4">
               {work?.tags && work.tags.length > 0
                 ? work.tags.map((tag: string) => (
                     <Badge
                       key={tag}
                       variant="secondary"
-                      className="mr-2 inline text-sm text-black/60"
+                      className="mb-2 mr-2 text-[0.6rem] text-black/60"
                     >
                       {tag}
                     </Badge>
                   ))
                 : null}
             </div>
+            <div className="mt-5 gap-x-4 border-t border-gray pt-5 text-[0.6rem] text-black/80">
+              <p>{japanDate(work.createdAt)}作成</p>
+              <p>{japanDate(work.updatedAt)}修正</p>
+            </div>
           </div>
 
-          <Image
-            src={work?.image ?? ""}
-            alt={work?.title ?? "work main image"}
-            width={400}
-            height={400}
-            className="h-full w-full rounded-xl border border-secondary object-cover object-center grayscale transition duration-500 hover:border-primary hover:grayscale-0"
-            priority
-            sizes="100vw"
-          />
+          <div className="h-full w-full overflow-hidden rounded-xl border border-secondary object-cover object-center  transition duration-500 hover:border-primary ">
+            <div className="absolute left-[5%] z-10 rounded-b-lg bg-secondary px-2 pb-1 pt-2 text-center text-[0.6rem] text-secondary-foreground shadow-sm first-letter:font-bold">
+              {work?.readingTime?.text}
+            </div>
+
+            <Image
+              src={work?.image ?? ""}
+              alt={work?.title ?? "work main image"}
+              width={400}
+              height={400}
+              className="h-full w-full object-cover object-center grayscale transition duration-500 group-hover:grayscale-0"
+              priority
+              sizes="100vw"
+            />
+            <div className="absolute bottom-[1px] right-[1px] z-[999] aspect-square h-full overflow-hidden">
+              <div className="absolute right-0 top-1/2 z-40 h-[1px] w-[600px] translate-x-1/2 -rotate-45 bg-primary dark:opacity-20" />
+            </div>
+          </div>
         </div>
+
         <div className="mt-8 grid grid-cols-12 gap-y-8 px-5 md:px-10 lg:gap-8">
           <div className="col-span-12 lg:col-span-4">
             <details
