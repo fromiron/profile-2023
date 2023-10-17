@@ -39,10 +39,10 @@ export default function PostCard({
               alt={work.title}
               className="h-full w-full transform object-cover object-center transition duration-500 ease-in-out group-hover:scale-105 group-hover:drop-shadow-xl group-focus:scale-105 group-active:scale-105"
             />
-            <div className="absolute  inset-0 z-50 flex items-end bg-gradient-to-t from-black/80 to-black/30 transition-all group-hover:to-black/20">
+            <div className="absolute  inset-0 z-50 flex items-end bg-gradient-to-t from-gray-900/50 to-gray-900/30 transition-all group-hover:to-gray-900/10">
               <div className="bg-transparent px-4 pb-4 text-white">
                 <p>{work.readingTime.text}</p>
-                <h3 className="my-2 text-2xl">{work.title}</h3>
+                <h3 className="my-2 text-3xl">{work.title}</h3>
                 <p className="text-bold">
                   {textSplitter(work.description, 35)[1].length > 0
                     ? textSplitter(work.description, 35)[0] + "..."
