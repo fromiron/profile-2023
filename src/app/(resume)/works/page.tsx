@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import PostCard from "@/components/ui/post-card";
 import TagItem from "@/components/ui/tag-item";
 import { Work, allWorks } from "contentlayer/generated";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function WorksPage() {
   const publishedWorks = allWorks
@@ -60,16 +66,24 @@ export default function WorksPage() {
 
   return (
     <section>
-      <ul className="-mx-2 mb-8 border-b pb-4">
-        {Object.entries(tagCount).map(([tag, count]) => (
-          <TagItem
-            key={tag}
-            count={count}
-            tag={tag}
-            selectedTag={selectedTag}
-            handleTag={() => handleTag(tag ?? "all")}
-          />
-        ))}
+      <ul className=" mb-8">
+        <Accordion type="single" collapsible>
+          <AccordionItem value="tags">
+            <AccordionTrigger />
+            <AccordionContent className="bg-transparent">
+              <div className="h-4" />
+              {Object.entries(tagCount).map(([tag, count]) => (
+                <TagItem
+                  key={tag}
+                  count={count}
+                  tag={tag}
+                  selectedTag={selectedTag}
+                  handleTag={() => handleTag(tag ?? "all")}
+                />
+              ))}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </ul>
       <ul className="grid grid-cols-6 gap-x-8 gap-y-12">
         {filteredWorks.map((work: Work, i) => (

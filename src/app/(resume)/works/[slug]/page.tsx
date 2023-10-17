@@ -77,7 +77,7 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
   return (
     <section>
       <article>
-        <div className="group relative h-[40vh] w-full overflow-hidden">
+        <div className="group relative h-[50vh] w-full overflow-hidden">
           <div className="absolute bottom-[10%] z-50 mx-[5%]  rounded-lg bg-primary-foreground/30 p-10 px-[10%] shadow-lg backdrop-blur-sm md:bottom-[20%]">
             <div className="flex items-center">
               <div className="mr-4 aspect-square w-4 rounded-full bg-primary" />
@@ -91,7 +91,7 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
                     <Badge
                       key={tag}
                       variant="secondary"
-                      className="mb-2 mr-2 text-[0.6rem] text-black/60"
+                      className="mb-2 mr-2 text-[0.6rem] text-black/60 shadow-md"
                     >
                       {tag}
                     </Badge>
@@ -118,8 +118,8 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
               priority
               sizes="100vw"
             />
-            <div className="absolute bottom-[1px] right-[1px] z-[999] aspect-square h-full overflow-hidden">
-              <div className="absolute right-0 top-1/2 z-40 h-[1px] w-[600px] translate-x-1/2 -rotate-45 bg-primary dark:opacity-20" />
+            <div className="absolute bottom-[1px] right-[1px]  aspect-square h-full overflow-hidden">
+              <div className="absolute right-0 top-1/2 h-[1px] w-[2000px] translate-x-1/2 -rotate-45 bg-primary dark:opacity-20" />
             </div>
           </div>
         </div>

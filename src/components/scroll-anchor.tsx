@@ -7,8 +7,6 @@ type Props = {
 };
 
 export default function ScrollAnchor(props: Props) {
-  console.log(props);
-
   const { id, className, children, ...rest } = props;
   const handleScroll = (id: string) => {
     const targetElement = document.getElementById(id);

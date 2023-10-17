@@ -12,11 +12,17 @@ import {
 } from "./ui/accordion";
 
 const StringComponent = (props: any) => {
+  const { children } = props;
+  const StringEl = (str: string) => {
+    return (
+      <strong className="relative">
+        <span className="truncate font-bold">{str}</span>
+        <span className="absolute bottom-0 left-0 right-0 -z-10 h-2 bg-primary/40" />
+      </strong>
+    );
+  };
   return (
-    <strong className="relative">
-      <span className="truncate font-bold" {...props} />
-      <span className="absolute bottom-0 left-0 right-0 -z-10 h-2 bg-primary/40" />
-    </strong>
+    <>{children.split("").map((str: string, i: number) => StringEl(str))}</>
   );
 };
 const LinkComponent = (props: any) => {
@@ -50,6 +56,14 @@ const OlComponent = (props: any) => {
     </div>
   );
 };
+const EmComponent = (props: any) => {
+  return (
+    <span
+      className="underline decoration-primary/40 decoration-wavy underline-offset-4"
+      {...props}
+    />
+  );
+};
 
 const components: MDXComponents = {
   h1: (props: any) => HeadingComponent(props, 1),
@@ -62,6 +76,7 @@ const components: MDXComponents = {
   a: LinkComponent,
   ol: OlComponent,
   hr: () => <hr className="my-8 border-none" />,
+  em: EmComponent,
   img: (props: any) => (
     // eslint-disable-next-line jsx-a11y/alt-text
     <Image
