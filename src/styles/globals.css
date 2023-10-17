@@ -50,6 +50,8 @@
 
     --ring: 24 5.4% 63.9%;
 
+    --black: 0, 0%, 14%;
+
     --radius: 0.5rem;
   }
 
@@ -82,6 +84,8 @@
     --destructive-foreground: 0 85.7% 97.3%;
 
     --ring: 12 6.5% 15.1%;
+
+    --black: 0, 0%, 90%;
   }
 
   /* code block */

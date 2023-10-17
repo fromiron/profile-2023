@@ -5,6 +5,8 @@ import META_DATA from "@/constants/metaData";
 import { allWorks } from "contentlayer/generated";
 import { Badge } from "@/components/ui/badge";
 import japanDate from "@/lib/japanDate";
+import ScrollAnchor from "@/components/scroll-anchor";
+import { cn } from "@/lib/utils";
 
 export async function generateStaticParams() {
   return allWorks.map((work) => ({ slug: work.url }));
@@ -135,24 +137,20 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
                 {work.toc.map((heading: any) => {
                   return (
                     <li key={`#${heading.slug}`} className="py-1">
-                      <a
-                        href={`#${heading.slug}`}
-                        data-level={heading.level}
-                        className="flex
-                                  items-center justify-start border-solid
-                                  data-[level=two]:border-t
-                                  data-[level=three]:pl-4
-                                  data-[level=two]:pl-0 data-[level=two]:pt-2 sm:data-[level=three]:pl-6
-                                  "
+                      <ScrollAnchor
+                        {...heading}
+                        className={cn(
+                          "block cursor-pointer pt-2 text-black transition-colors duration-500 hover:text-primary",
+                          heading.level === 1 &&
+                            "w-full border-t font-semibold",
+                          heading.level === 2 && "pl-4",
+                          heading.level === 3 && "pl-8",
+                        )}
                       >
-                        {heading.level === "three" ? (
-                          <span className="mr-2 flex h-1 w-1 rounded-full">
-                            &nbsp;
-                          </span>
-                        ) : null}
-
-                        <span className="hover:underline">{heading.text}</span>
-                      </a>
+                        <span className="underline-offset-4 hover:underline">
+                          {heading.text}
+                        </span>
+                      </ScrollAnchor>
                     </li>
                   );
                 })}

@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 const Footer = () => {
   return (
-    <footer className={`${FONT_EN} w-full bg-secondary`}>
+    <footer className={`${FONT_EN} mt-24 w-full bg-secondary`}>
       <div className="mx-6 pt-8 text-center">
         <h5 className="mb-2 uppercase">
           <span className="font-semibold text-primary">Thank you</span>

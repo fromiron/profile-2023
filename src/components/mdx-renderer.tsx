@@ -30,10 +30,9 @@ const LinkComponent = (props: any) => {
 };
 
 const HeadingComponent = (props: any, level: number) => {
-  const { children, ...rest } = props;
   const HeadingLevel = `h${level}` as keyof JSX.IntrinsicElements;
 
-  return <HeadingLevel {...rest}>{children}</HeadingLevel>;
+  return <HeadingLevel {...props} />;
 };
 const OlComponent = (props: any) => {
   const { children } = props;

@@ -26,7 +26,7 @@ export default function PostCard({
     <>
       <li key={work.url} className={wrapperClass + wrapperClass2}>
         {showAccBlock && (
-          <div className="flex aspect-square w-full items-center justify-center rounded-lg bg-secondary">
+          <div className="flex aspect-square w-0 items-center justify-center rounded-lg bg-secondary md:w-full">
             <Logo />
           </div>
         )}
