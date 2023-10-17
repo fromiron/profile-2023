@@ -13,7 +13,7 @@ const Footer = () => {
         </h5>
       </div>
       <div className="mx-auto mb-2 grid w-fit grid-cols-3 gap-x-4">
-        <a href="#top">
+        <a href="/">
           <Button
             variant={"ghost"}
             className="group w-full border border-transparent transition-colors duration-500 hover:border hover:border-primary"
@@ -48,6 +48,7 @@ const Footer = () => {
         <a className="mx-3" href="#">
           <Logo />
         </a>
+        <a href="mailto:artless1112@gmail.com">artless1112@gmail.com</a>
       </div>
     </footer>
   );
