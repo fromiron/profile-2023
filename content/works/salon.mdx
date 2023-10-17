@@ -15,46 +15,50 @@ updatedAt: 2023-09-08
 publishedAt: 2023-09-08
 ---
 
-## プロジェクトの概要
-### プロジェクト基本情報
+## 1.プロジェクトの概要
+### 1.1 プロジェクト基本情報
 - プロジェクト期間: **2020年11月 - 2020年12月**
 - クライアント: IT派遣会社
 - 役割: Webデザイナー
 - チーム構成: 1人
 
-### デザインツール
+### 1.2 デザインツール
 - **Figma**
 
-### 開発環境
+### 1.3 開発環境
 1. Windows 10
 2. PhpStorm
 3. Bitbucket
 
-### 使用言語/FW/ライブラリ
+### 1.4 使用言語/FW/ライブラリ
 - JavaScript
 - Next.js
 - Context API
 
-## 悩んだ点
-### 透明ヘッダー
+## 2. 成果
+- デザインスキルの向上: グラフィックデザイン、UI/UXデザイン、カラーコーディネーションなどのスキルを磨き、デザインの質を向上させました。
+- **TailwindCSS導入**: 今後からCSS実装はTailwindCSSを使う予定だったため、比較的に簡単なこのプロジェクトで最初導入しテストしました。**TailwindCSSの初期設定からThemeの設定方法が分かるようになり、効率敵なCSS作成ができました。**
+- **モバイルレスポンシブデザイン**: TailwindCSSでのレスポンシブデザインの実装方法を身につけることができました。
+
+## 3. 悩んだこと
 ヘッダーを透明にしたため、スクロールすると背景イメージの色によってメニューが見ずらい問題が発生しまいた。
 そのため、表示中のセクションによってヘッダーの背景色が変わるよう機能をContext APIで実装しました。
 ここて問題になったのは、スクロールイベントにキャッチして、現在のセクションを判断することでした。
-これは[**Intersection Observer API**](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)を使って解決しました。
+これは[**Intersection Observer API**](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)を使ってパフォーマンス低下を起こさず解決することができました。
 
 ```js showLineNumbers
 const io = new IntersectionObserver(entries => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) { // 画面に表示されているセクションを判断
-                    io.unobserve(entry.target); // 画面に表示されているセクションを監視対象から外す
+                 // 画面に表示されているセクションを判断
+                if (entry.isIntersecting) {
+                    // 画面に表示されているセクションを監視対象から外す
+                    io.unobserve(entry.target); 
                     const menuName = entry.target.id.replaceAll('-', ' ');
-                    handleScrollPosition(menuName); // context apiのstateを更新
+                    // context apiのstateを更新
+                    handleScrollPosition(menuName); 
                 }
             });
         },{ threshold: 0.2, rootMargin:'0px 0px -50% 0px'})
 ```
 
-## 成果
-- デザインスキルの向上: グラフィックデザイン、UI/UXデザイン、カラーコーディネーションなどのスキルを磨き、デザインの質を向上させました。
-- **TailwindCSS導入**: 今後からCSS実装はTailwindCSSを使う予定だったため、比較的に簡単なこのプロジェクトで最初導入しテストしました。**TailwindCSSの初期設定からThemeの設定方法が分かるようになり、効率敵なCSS作成ができました。**
-- **モバイルレスポンシブデザイン**: TailwindCSSでのレスポンシブデザインの実装方法を身につけることができました。
+

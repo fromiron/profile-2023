@@ -11,15 +11,15 @@ import {
   AccordionTrigger,
 } from "./ui/accordion";
 
-const createStringComponent = (props: any) => {
+const StringComponent = (props: any) => {
   return (
     <strong className="relative">
-      <span className="font-bold" {...props} />
+      <span className="truncate font-bold" {...props} />
       <span className="absolute bottom-0 left-0 right-0 -z-10 h-2 bg-primary/40" />
     </strong>
   );
 };
-const createLinkComponent = (props: any) => {
+const LinkComponent = (props: any) => {
   const { children, ...rest } = props;
   return (
     <a {...rest} className="inline cursor-pointer select-none text-primary">
@@ -29,13 +29,13 @@ const createLinkComponent = (props: any) => {
   );
 };
 
-const createHeadingComponent = (props: any, level: number) => {
+const HeadingComponent = (props: any, level: number) => {
   const { children, ...rest } = props;
   const HeadingLevel = `h${level}` as keyof JSX.IntrinsicElements;
 
   return <HeadingLevel {...rest}>{children}</HeadingLevel>;
 };
-const createOlComponent = (props: any) => {
+const OlComponent = (props: any) => {
   const { children } = props;
 
   return (
@@ -53,15 +53,15 @@ const createOlComponent = (props: any) => {
 };
 
 const components: MDXComponents = {
-  h1: (props: any) => createHeadingComponent(props, 1),
-  h2: (props: any) => createHeadingComponent(props, 2),
-  h3: (props: any) => createHeadingComponent(props, 3),
-  h4: (props: any) => createHeadingComponent(props, 4),
-  h5: (props: any) => createHeadingComponent(props, 5),
-  h6: (props: any) => createHeadingComponent(props, 6),
-  strong: createStringComponent,
-  a: createLinkComponent,
-  ol: createOlComponent,
+  h1: (props: any) => HeadingComponent(props, 1),
+  h2: (props: any) => HeadingComponent(props, 2),
+  h3: (props: any) => HeadingComponent(props, 3),
+  h4: (props: any) => HeadingComponent(props, 4),
+  h5: (props: any) => HeadingComponent(props, 5),
+  h6: (props: any) => HeadingComponent(props, 6),
+  strong: StringComponent,
+  a: LinkComponent,
+  ol: OlComponent,
   hr: () => <hr className="my-8 border-none" />,
   img: (props: any) => (
     // eslint-disable-next-line jsx-a11y/alt-text
