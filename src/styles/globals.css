@@ -9,6 +9,7 @@
   /* HeaderのHeight分PTで下げるHeaderのHeightを抜いた最大スクリーンHeight */
   section {
     min-height: calc(100vh - 7rem);
+    padding-top: 7rem;
   }
 
   /* スクロールバーを非表示 */
