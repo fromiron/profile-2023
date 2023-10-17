@@ -35,7 +35,7 @@ export default function WorkSection() {
     <section
       ref={targetRef}
       id="work"
-      className="flex items-center justify-center"
+      className="flex items-center justify-center pt-[7rem]"
     >
       <div className="mx-auto mt-10 grid max-w-sm grid-cols-1 justify-center md:max-w-full  lg:grid-cols-2">
         <div className="mx-auto aspect-square w-full max-w-sm">
