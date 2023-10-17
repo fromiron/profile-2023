@@ -1,7 +1,7 @@
 import MdxRenderer from "@/components/mdx-renderer";
 
 import { allProfiles } from "contentlayer/generated";
-export default async function profilePage() {
+export default async function ProfilePage() {
   return (
     <section>
       <article className="mx-auto max-w-5xl rounded-xl border border-gray px-8 py-14">

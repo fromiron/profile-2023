@@ -7,6 +7,7 @@ import { ReactNode } from "react";
 import { FONT_JP } from "@/styles/fonts";
 import Providers from "../providers";
 import ThemeSelector from "@/components/ui/theme-selector";
+import PageChanger from "@/components/ui/page-changer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,6 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
           <ScrollProgressBar />
           <Header />
+          <PageChanger />
 
           <main className="container max-w-screen-xl overflow-x-hidden lg:overflow-x-visible">
             {children}

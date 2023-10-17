@@ -8,6 +8,7 @@ import { FONT_JP } from "@/styles/fonts";
 import ThemeSelector from "@/components/ui/theme-selector";
 import Providers from "../providers";
 import ResumeHeader from "@/components/layout/resume-header";
+import PageChanger from "@/components/ui/page-changer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,6 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <ThemeSelector />
           <ScrollProgressBar />
           <ResumeHeader />
+          <PageChanger />
           <main className="container max-w-screen-xl overflow-x-hidden lg:overflow-x-visible">
             {children}
           </main>

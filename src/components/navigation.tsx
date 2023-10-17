@@ -1,11 +1,18 @@
 "use client";
 
+import useFirstVisitStore from "@/store/first-visit-store";
 import useNavigationStore, { NavMenu } from "@/store/navigation-store";
 import { motion } from "framer-motion";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const Navigation = () => {
   const { activeLink, navItems } = useNavigationStore();
+  const { checkFirstVisit } = useFirstVisitStore();
+
+  useEffect(() => {
+    checkFirstVisit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const navContainerRef = useRef<HTMLUListElement | null>(null);
   const [accWidth, setAccWidth] = useState(0);
 
