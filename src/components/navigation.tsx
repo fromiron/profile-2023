@@ -4,6 +4,7 @@ import useFirstVisitStore from "@/store/first-visit-store";
 import useNavigationStore, { NavMenu } from "@/store/navigation-store";
 import { motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import ScrollAnchor from "./scroll-anchor";
 
 const Navigation = () => {
   const { activeLink, navItems } = useNavigationStore();
@@ -66,14 +67,14 @@ const NavItem = ({
 }) => {
   return (
     <li>
-      <a
-        href={url}
-        className={`text-xl transition-all duration-500 ${
+      <ScrollAnchor
+        elID={url.replace("/#", "")}
+        className={`cursor-pointer text-xl transition-all duration-500 ${
           selected ? "font-medium text-primary" : ""
         } select-none hover:text-primary`}
       >
         {text}
-      </a>
+      </ScrollAnchor>
     </li>
   );
 };
