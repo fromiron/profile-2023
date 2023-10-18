@@ -1,9 +1,18 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import TypingText from "@/components/ui/typing-text";
 import useViewportAction from "@/hooks/useViewportAction";
 import useNavigationStore from "@/store/navigation-store";
 import { FONT_EN, FONT_JP } from "@/styles/fonts";
+import Link from "next/link";
 import { useRef } from "react";
+import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 
 const textList = [
   "Hello, Japan!",
@@ -42,6 +51,21 @@ export default function AboutSection() {
         </div>
       </div>
       <TextArea />
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger className="mt-8 w-full">
+            <Button variant={"ghost"} asChild>
+              <Link href="/profile">
+                <HiMiniArrowTopRightOnSquare className="h-4 w-4" />
+                <span className={`${FONT_EN} ml-2`}>View Profile</span>
+              </Link>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="px-8 text-lg shadow-md">
+            <p>WEBプロフィールページへ移動</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </section>
   );
 }

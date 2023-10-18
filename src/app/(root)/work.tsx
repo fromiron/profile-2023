@@ -39,7 +39,7 @@ export default function WorkSection() {
     <section
       ref={targetRef}
       id="work"
-      className="flex items-center justify-center pt-[7rem]"
+      className="flex items-center justify-center"
     >
       <div className="mx-auto mt-10 grid max-w-sm grid-cols-1 justify-center md:max-w-full  lg:grid-cols-2">
         <motion.div
@@ -54,15 +54,15 @@ export default function WorkSection() {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger className="mt-8 w-full">
-                <Button variant={"ghost"} className="w-full" asChild>
-                  <Link href="/works" target="_blank">
+                <Button variant={"ghost"} asChild>
+                  <Link href="/works">
                     <HiMiniArrowTopRightOnSquare className="h-4 w-4" />
                     <span className={`${FONT_EN} ml-2`}>View All Works</span>
                   </Link>
                 </Button>
               </TooltipTrigger>
               <TooltipContent className="px-8 text-lg shadow-md">
-                <p>別のタブで開きます</p>
+                <p>実務経験ポストリストに移動</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
