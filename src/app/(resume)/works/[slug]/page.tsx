@@ -78,7 +78,7 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
     <section>
       <article>
         <div className="group relative h-[50vh] w-full overflow-hidden">
-          <div className="absolute bottom-[10%] z-50 mx-[5%]  rounded-lg bg-primary-foreground/30 p-10 px-[10%] shadow-lg backdrop-blur-sm md:bottom-[20%]">
+          <div className="absolute bottom-[10%] z-50 mx-[5%]  rounded-lg bg-primary-foreground/50 p-10 px-[10%] shadow-lg backdrop-blur-sm md:bottom-[20%]">
             <div className="flex items-center">
               <div className="mr-4 aspect-square w-4 rounded-full bg-primary" />
               <h1 className="text-3xl font-bold text-black lg:text-4xl">
@@ -133,16 +133,15 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
               <summary className="cursor-pointer text-lg font-semibold capitalize text-primary">
                 Table Of Content
               </summary>
-              <ul className="font-in mt-4 text-base">
+              <ul className="mt-4 text-xs md:text-sm">
                 {work.toc.map((heading: any) => {
                   return (
-                    <li key={`#${heading.slug}`} className="py-1">
+                    <li key={`#${heading.slug}`}>
                       <ScrollAnchor
                         {...heading}
                         className={cn(
                           "block cursor-pointer pt-2 text-black transition-colors duration-500 hover:text-primary",
-                          heading.level === 1 &&
-                            "w-full border-t font-semibold",
+                          heading.level === 1 && "mt-2 w-full font-semibold",
                           heading.level === 2 && "pl-4",
                           heading.level === 3 && "pl-8",
                         )}

@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import makeDelay from "@/lib/makeDelay";
 import { FONT_EN } from "@/styles/fonts";
+import { motion } from "framer-motion";
 
 export default function ThemeSelector() {
   const [focus, setFocus] = useState(false);
@@ -32,12 +33,14 @@ export default function ThemeSelector() {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       onMouseEnter={handleFocusIn}
       onMouseLeave={handleFocusOut}
-      className={`top-[1rem] left-0 fixed z-[9999] bg-primary p-2 rounded-r-lg  ${
+      className={`fixed left-0 top-[1rem] z-[9999] rounded-r-lg bg-primary p-2  ${
         focus ? "-translate-x-0" : "-translate-x-[80%]"
-      } hover:-translate-x-0 transition-transform duration-500 cursor-pointer`}
+      } cursor-pointer transition-transform duration-500 hover:-translate-x-0`}
     >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -49,35 +52,35 @@ export default function ThemeSelector() {
             <ThemeIcons />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="z-[9999] p-8 ml-8 border-primary">
+        <DropdownMenuContent className="z-[9999] ml-8 border-primary p-8">
           <DropdownMenuLabel
-            className={`mb-2 text-center border-b ${FONT_EN} text-lg`}
+            className={`mb-2 border-b text-center ${FONT_EN} text-lg`}
           >
-            <span className="capitalize text-primary font-light">{theme}</span>{" "}
+            <span className="font-light capitalize text-primary">{theme}</span>{" "}
             Mode
           </DropdownMenuLabel>
 
           <DropdownMenuItem onClick={() => handleThemeChange("light")}>
-            <div className="h-[1rem] w-[1rem] inline mr-2">
+            <div className="mr-2 inline h-[1rem] w-[1rem]">
               <Sun />
             </div>
             ライトモード
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => handleThemeChange("dark")}>
-            <div className="h-[1rem] w-[1rem] inline mr-2">
+            <div className="mr-2 inline h-[1rem] w-[1rem]">
               <Moon />
             </div>
             だーくモード
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => handleThemeChange("system")}>
-            <div className="h-[1rem] w-[1rem] inline mr-2">
+            <div className="mr-2 inline h-[1rem] w-[1rem]">
               <System />
             </div>
             システム設定
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </div>
+    </motion.div>
   );
 }
 
@@ -87,7 +90,7 @@ function ThemeIcons() {
       <span className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 text-orange-300 transition-all dark:-rotate-90 dark:scale-0">
         <Sun />
       </span>
-      <span className="absolute h-[1.2rem] w-[1.2rem] rotate-90 text-orange-300 scale-0 transition-all dark:rotate-0 dark:scale-100">
+      <span className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 text-orange-300 transition-all dark:rotate-0 dark:scale-100">
         <Moon />
       </span>
     </>

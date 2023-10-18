@@ -1,13 +1,13 @@
 "use client";
 import { ReactNode } from "react";
 type Props = {
-  id: string;
+  slug: string;
   className: string;
   children: ReactNode;
 };
 
 export default function ScrollAnchor(props: Props) {
-  const { id, className, children, ...rest } = props;
+  const { slug, className, children, ...rest } = props;
   const handleScroll = (id: string) => {
     const targetElement = document.getElementById(id);
     const headerElement = document.querySelector("header");
@@ -23,7 +23,7 @@ export default function ScrollAnchor(props: Props) {
   };
 
   return (
-    <a onClick={() => handleScroll(id)} className={` ${className}`} {...rest}>
+    <a onClick={() => handleScroll(slug)} className={` ${className}`} {...rest}>
       {children}
     </a>
   );

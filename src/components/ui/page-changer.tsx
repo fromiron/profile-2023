@@ -8,7 +8,7 @@ import { AiOutlineCaretUp } from "react-icons/ai";
 import { Badge } from "./badge";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { motion } from "framer-motion";
 const PageChanger = () => {
   const { isFirstVisit } = useFirstVisitStore();
   const [focus, setFocus] = useState(false);
@@ -42,12 +42,14 @@ const PageChanger = () => {
   }, [isFirstVisit]);
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       onMouseEnter={handleFocusIn}
       onMouseLeave={handleFocusOut}
       className={`fixed right-0 top-[1rem] z-[9998] rounded-l-lg bg-primary p-2 ${
         focus ? "translate-x-0" : "translate-x-[90%]"
-      } cursor-pointer transition-transform duration-500 hover:-translate-x-0`}
+      } cursor-pointer transition-transform duration-500`}
     >
       <div
         className={cn(
@@ -76,7 +78,7 @@ const PageChanger = () => {
           {path === "/" ? "履歴ページ" : "メインページ"}
         </Button>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 

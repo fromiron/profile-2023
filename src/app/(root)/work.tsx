@@ -16,15 +16,19 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { allCategories } from "contentlayer/generated";
-
+import { motion, useAnimationControls } from "framer-motion";
 const DISPLAY_LIMIT = 5;
 
 export default function WorkSection() {
   const [index, setIndex] = useState(0);
   const { setActiveLink } = useNavigationStore();
   const targetRef = useRef(null);
+  const controls = useAnimationControls();
   const onViewportEnter = () => {
     setActiveLink("/#work");
+    controls.start({
+      rotate: 0,
+    });
   };
   useViewportAction({ callback: onViewportEnter, ref: targetRef });
   const limited = allCategories.slice(0, DISPLAY_LIMIT);
@@ -38,9 +42,13 @@ export default function WorkSection() {
       className="flex items-center justify-center pt-[7rem]"
     >
       <div className="mx-auto mt-10 grid max-w-sm grid-cols-1 justify-center md:max-w-full  lg:grid-cols-2">
-        <div className="mx-auto aspect-square w-full max-w-sm">
+        <motion.div
+          initial={{ rotate: -45 }}
+          animate={controls}
+          className=" mx-auto aspect-square w-full max-w-sm"
+        >
           <ImageSlider images={mainImages} setIndex={setIndex} index={index} />
-        </div>
+        </motion.div>
         <Description title={title} tags={tags}>
           <MdxRenderer code={body.code} />
           <TooltipProvider>

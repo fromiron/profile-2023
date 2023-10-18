@@ -42,8 +42,8 @@ export default function PostCard({
             <div className="absolute  inset-0 z-50 flex items-end bg-gradient-to-t from-gray-900/50 to-gray-900/30 transition-all group-hover:to-gray-900/10">
               <div className="bg-transparent px-4 pb-4 text-white">
                 <p>{work.readingTime.text}</p>
-                <h3 className="my-2 text-3xl">{work.title}</h3>
-                <p className="text-bold">
+                <h3 className="my-2 text-2xl lg:text-3xl">{work.title}</h3>
+                <p className="text-bold sm:hidden lg:block">
                   {textSplitter(work.description, 35)[1].length > 0
                     ? textSplitter(work.description, 35)[0] + "..."
                     : textSplitter(work.description, 35)[0]}

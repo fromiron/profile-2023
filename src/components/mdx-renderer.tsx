@@ -13,16 +13,16 @@ import {
 
 const StringComponent = (props: any) => {
   const { children } = props;
-  const StringEl = (str: string) => {
+  const StringEl = (str: string, i: number) => {
     return (
-      <strong className="relative">
+      <strong className="relative" key={i}>
         <span className="truncate font-bold">{str}</span>
         <span className="absolute bottom-0 left-0 right-0 -z-10 h-2 bg-primary/40" />
       </strong>
     );
   };
   return (
-    <>{children.split("").map((str: string, i: number) => StringEl(str))}</>
+    <>{children.split("").map((str: string, i: number) => StringEl(str, i))}</>
   );
 };
 const LinkComponent = (props: any) => {
@@ -41,15 +41,13 @@ const HeadingComponent = (props: any, level: number) => {
   return <HeadingLevel {...props} />;
 };
 const OlComponent = (props: any) => {
-  const { children } = props;
-
   return (
     <div className="-mt-4">
       <Accordion type="multiple">
         <AccordionItem value="item1">
           <AccordionTrigger />
           <AccordionContent>
-            <ol className="text-base">{children}</ol>
+            <ol className="text-base" {...props} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

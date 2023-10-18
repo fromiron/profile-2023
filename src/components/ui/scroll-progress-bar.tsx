@@ -6,26 +6,30 @@ const ScrollProgressBar = () => {
   const { scrollYProgress } = useScroll();
   const topPosition = useTransform(
     scrollYProgress,
-    (value) => value * 100 + "%"
+    (value) => value * 100 + "%",
   );
 
   return (
-    <div className="fixed top-0 left-4 w-[5px] z-[9998] h-screen">
+    <motion.div
+      initial={{ y: -200 }}
+      animate={{ y: 0 }}
+      className="fixed -top-10 left-4 z-[9998] h-screen w-[5px]"
+    >
       <motion.div
-        className="absolute top-0 left-[2px] bg-primary w-[1px] h-screen origin-top"
+        className="absolute left-[2px] top-0 h-screen w-[1px] origin-top bg-primary"
         style={{ scaleY: scrollYProgress }}
       />
       <motion.div className={`absolute`} style={{ top: topPosition }}>
         <motion.div
-          className={`absolute top-0 left-[2px] bg-primary w-[1px] origin-top`}
+          className={`absolute left-[2px] top-0 w-[1px] origin-top bg-primary`}
           style={{ height: HEADER_HEIGHT }}
         />
         <motion.div
-          className={`absolute bg-primary top-[80px] -translate-y-[5px] w-[5px] h-[5px] rounded-full`}
+          className={`absolute top-[80px] h-[5px] w-[5px] -translate-y-[5px] rounded-full bg-primary`}
           style={{ top: HEADER_HEIGHT }}
         />
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
