@@ -9,6 +9,7 @@ import ThemeSelector from "@/components/ui/theme-selector";
 import Providers from "../providers";
 import ResumeHeader from "@/components/layout/resume-header";
 import PageChanger from "@/components/ui/page-changer";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,6 +33,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             {children}
           </main>
           <Footer />
+          <Toaster />
         </Providers>
       </body>
     </html>
