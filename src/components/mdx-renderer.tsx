@@ -47,7 +47,7 @@ const OlComponent = (props: any) => {
         <AccordionItem value="item1">
           <AccordionTrigger />
           <AccordionContent>
-            <ol className="text-base" {...props} />
+            <ol className="text-base font-medium" {...props} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
