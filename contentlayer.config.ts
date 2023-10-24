@@ -116,8 +116,7 @@ export const Works = defineDocumentType(() => ({
             const flag = groups?.flag;
             const content = groups?.content;
             return {
-              level:
-                flag?.length,
+              level: flag?.length,
               text: content,
               slug: content ? slugger.slug(content) : undefined,
             };

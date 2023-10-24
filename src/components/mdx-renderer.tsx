@@ -10,6 +10,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
+import CarouselSlider from "./ui/image-array-renderer";
+import ImageArrayRenderer from "./ui/image-array-renderer";
 
 const StringComponent = (props: any) => {
   const { children } = props;
@@ -54,6 +56,23 @@ const OlComponent = (props: any) => {
     </div>
   );
 };
+
+const PComponent = (props: any) => {
+  const { children } = props;
+  if (children instanceof Array) {
+    // imgの数を数えて2つ以上ならCarouselSliderを返す
+    const childrenArray = children.filter(
+      (child: any) => child?.type?.name === "img",
+    );
+    if (childrenArray.length > 1) {
+      const images = childrenArray.map((item) => item.props);
+      return <ImageArrayRenderer images={images} />;
+    }
+  }
+
+  return <p {...props} />;
+};
+
 const EmComponent = (props: any) => {
   return (
     <span
@@ -84,6 +103,7 @@ const components: MDXComponents = {
       height={400}
     />
   ),
+  p: PComponent,
 };
 
 const MdxRenderer = ({ code }: { code: string }) => {
