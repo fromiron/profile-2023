@@ -1,0 +1,104 @@
+---
+title: "コインランドリーサイト"
+image: /works/laundry-land/cover.png
+tags:
+  - Figma
+  - Web Design
+  - Tailwind CSS
+  - Next.js
+  - TypeScript
+  - React.js
+description: "コインランドリーサイトのデザインを作成しました。"
+author: "J.Lee"
+isPublished: true
+createdAt: 2023-10-25
+updatedAt: 2023-10-25
+publishedAt: 2023-10-25
+---
+
+
+# 1. プロジェクトの概要
+- サイトリニューアルのため、デザインを変更
+- イメージサイズなどの最適化機能を利用するためNext.jsのExport機能を利用
+
+## 1.1 プロジェクト基本情報
+- プロジェクト期間: **2022年7月 - 2022年8月**
+- 役割: Webデザイナー・フロントエンドエンジニア
+
+## 1.2 使用ツール
+1. Figma
+2. Photoshop
+3. Illustrator
+
+## 1.3 開発環境
+1. Windows 10
+2. PhpStorm
+3. Bitbucket
+
+## 1.4 使用言語/FW/ライブラリ
+- TypeScript
+- Next.js
+
+# 2. デザイン
+## 2.1 コンセプト
+- メインページでブランド、地域などを選択できるナビゲーションを設置
+- 写真が多く使われる予定のため、コンポーネントはPrimaryカラーと無彩色のみ使い混雑しないようにデザイン
+
+
+## 2.2 全般的なイメージ
+![main](/works/laundry-land/main.png "全般的なイメージ")
+
+## 2.3 コンポーネンデザイン
+![acc](/works/laundry-land/acc.png "アクセサリー")
+![card](/works/laundry-land/card.png "カードコンポーネント")
+![gallery](/works/laundry-land/gallery.png "ギャラリー")
+![section-title](/works/laundry-land/section-title.png "セクションタイトル")
+![banner](/works/laundry-land/banner.png "バナー")
+
+# 3. 悩んだこと
+## 3.1 Next.js選択の理由
+イメージ、JSファイルの最適化のためWebpackを使うには多くの別当プラグインが必要であり、ボイラープレートが多くなると思いました。
+結局そこまでコードが長くなるのであれば、静的ページが作成できるメタ―フレームワークを使う方が良いと思いました。
+Next.jsのExport機能だけ使用するのであれば強力なGatsby-Image API使えるGatsby.jsと悩んだあげく、
+各サイズのサムネールイメージまで生成するまではないとのことでシェアーの多いNext.jsを選択しました。
+## 3.2 スクロール反応ヘッダー
+メタ―フレームワークを導入したとはいえなるべく軽くしたいと思い、外部ライブラリーを使わずスクロール反応ヘッダーを実装しました。
+スクロールイベントのデバウンシングを行い、クライアント側のシステムリソースを節約するよう設計、スクロール反応ヘッダーコンポーネントを作成しました。
+```typescript
+//useDebounce
+import { useEffect, useState } from "react";
+
+function useDebounce<T>(value: T, delay?: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+export default useDebounce;
+
+```
+```typescript
+//使用例
+  const [isTop, setIsTop] = useState(true);
+  const debouncedScroll = useDebounce<boolean>(isTop, 300);
+  const SCROLL_TOP_CHECK_POINT = 100;
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    setIsTop(scrollTop < SCROLL_TOP_CHECK_POINT);
+  };
+    useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+```
