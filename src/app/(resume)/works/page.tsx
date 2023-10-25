@@ -85,7 +85,7 @@ export default function WorksPage() {
           </AccordionItem>
         </Accordion>
       </ul>
-      <ul className="grid grid-cols-6 gap-x-8 gap-y-12">
+      <ul className="grid grid-cols-6 gap-8">
         {filteredWorks.map((work: Work, i) => (
           <PostCard
             key={work._id}

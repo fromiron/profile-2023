@@ -26,12 +26,12 @@ export default function PostCard({
     <>
       <li key={work.url} className={wrapperClass + wrapperClass2}>
         {showAccBlock && (
-          <div className="flex aspect-square w-0 items-center justify-center rounded-lg bg-secondary md:w-full">
+          <div className="hidden aspect-[7/5] w-0 items-center justify-center rounded-lg bg-secondary md:flex md:w-full">
             <Logo />
           </div>
         )}
         <Link href={work.url}>
-          <div className="group relative aspect-square overflow-hidden rounded-lg">
+          <div className="group relative aspect-[7/5] overflow-hidden rounded-lg">
             <Image
               src={work.image}
               width={isBig ? 800 : 400}
@@ -39,11 +39,11 @@ export default function PostCard({
               alt={work.title}
               className="h-full w-full transform object-cover object-center transition duration-500 ease-in-out group-hover:scale-105 group-hover:drop-shadow-xl group-focus:scale-105 group-active:scale-105"
             />
-            <div className="absolute  inset-0 z-50 flex items-end bg-gradient-to-t from-gray-900/50 to-gray-900/30 transition-all group-hover:to-gray-900/10">
+            <div className="absolute inset-0 z-50 flex items-end bg-gradient-to-t from-gray-900/70 to-gray-900/50 transition-all group-hover:to-gray-900/10">
               <div className="bg-transparent px-4 pb-4 text-white">
                 <p>{work.readingTime.text}</p>
-                <h3 className="my-2 text-2xl lg:text-3xl">{work.title}</h3>
-                <p className="text-bold sm:hidden lg:block">
+                <h3 className="my-2 text-2xl font-semibold">{work.title}</h3>
+                <p className="sm:hidden lg:block">
                   {textSplitter(work.description, 35)[1].length > 0
                     ? textSplitter(work.description, 35)[0] + "..."
                     : textSplitter(work.description, 35)[0]}
