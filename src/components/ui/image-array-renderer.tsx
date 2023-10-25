@@ -54,7 +54,23 @@ export default function ImageArrayRenderer({
   return (
     <>
       {showImage.src && (
-        <div className=" fixed inset-0 z-[9999] flex h-screen w-full items-center justify-center overflow-hidden bg-foreground/20 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[9999] flex h-screen w-full items-center justify-center overflow-hidden bg-foreground/20 backdrop-blur-sm">
+          <div
+            className="absolute bottom-0 right-0 top-0 z-[9999] flex cursor-pointer items-center px-2"
+            onClick={nextImage}
+          >
+            <Button variant={"ghost"} size={"icon"}>
+              <MdOutlineNavigateNext className="h-8 w-8" />
+            </Button>
+          </div>
+          <div
+            className="absolute bottom-0 left-0 top-0 z-[9999] flex cursor-pointer items-center px-2"
+            onClick={prevImage}
+          >
+            <Button variant={"ghost"} size={"icon"} className="select-none">
+              <MdOutlineNavigateBefore className="h-8 w-8" />
+            </Button>
+          </div>
           <Image
             className="z-[9999] max-h-[80%] w-auto max-w-[80%] rounded-lg shadow-2xl"
             src={showImage.src}
@@ -62,16 +78,6 @@ export default function ImageArrayRenderer({
             width={800}
             height={800}
           />
-          <div className="absolute bottom-0 right-0 top-0 z-[9999] flex items-center px-2">
-            <Button variant={"secondary"} size={"icon"} onClick={nextImage}>
-              <MdOutlineNavigateNext className="h-8 w-8" />
-            </Button>
-          </div>
-          <div className="absolute bottom-0 left-0 top-0 z-[9999] flex items-center px-2">
-            <Button variant={"secondary"} size={"icon"} onClick={prevImage}>
-              <MdOutlineNavigateBefore className="h-8 w-8" />
-            </Button>
-          </div>
           <div
             className="group absolute inset-0 z-50 flex h-screen w-full justify-center "
             onClick={exitGallery}
@@ -87,7 +93,7 @@ export default function ImageArrayRenderer({
         {images.map((_image, i) => (
           <div
             key={i}
-            className="group relative overflow-hidden rounded-lg border"
+            className="group relative cursor-pointer overflow-hidden rounded-lg border"
             onClick={() =>
               setShowImage({
                 src: _image.src,

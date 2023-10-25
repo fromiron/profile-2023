@@ -99,8 +99,8 @@ const components: MDXComponents = {
     <Image
       {...props}
       className="w-full rounded-lg border transition-colors duration-500 hover:border-primary"
-      width={400}
-      height={400}
+      width={800}
+      height={800}
     />
   ),
   p: PComponent,
