@@ -12,6 +12,7 @@ import {
 } from "./ui/accordion";
 import CarouselSlider from "./ui/image-array-renderer";
 import ImageArrayRenderer from "./ui/image-array-renderer";
+import { cn } from "@/lib/utils";
 
 const StringComponent = (props: any) => {
   const { children } = props;
@@ -37,11 +38,6 @@ const LinkComponent = (props: any) => {
   );
 };
 
-const HeadingComponent = (props: any, level: number) => {
-  const HeadingLevel = `h${level}` as keyof JSX.IntrinsicElements;
-
-  return <HeadingLevel {...props} />;
-};
 const OlComponent = (props: any) => {
   return (
     <div className="-mt-4">
@@ -83,12 +79,6 @@ const EmComponent = (props: any) => {
 };
 
 const components: MDXComponents = {
-  h1: (props: any) => HeadingComponent(props, 1),
-  h2: (props: any) => HeadingComponent(props, 2),
-  h3: (props: any) => HeadingComponent(props, 3),
-  h4: (props: any) => HeadingComponent(props, 4),
-  h5: (props: any) => HeadingComponent(props, 5),
-  h6: (props: any) => HeadingComponent(props, 6),
   strong: StringComponent,
   a: LinkComponent,
   ol: OlComponent,
