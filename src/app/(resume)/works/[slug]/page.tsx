@@ -78,7 +78,7 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
 
   return (
     <section>
-      <div className="mb-2 text-xs">
+      <div className="mb-2 ml-2 text-xs">
         <div className="mr-2 inline-block h-2 w-2 rounded-full bg-primary" />
         <Link href={"/works"}>
           <span className="">Works</span>
