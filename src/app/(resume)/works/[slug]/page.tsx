@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import japanDate from "@/lib/japanDate";
 import ScrollAnchor from "@/components/scroll-anchor";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { LuChevronRight } from "react-icons/lu";
 
 export async function generateStaticParams() {
   return allWorks.map((work) => ({ slug: work.url }));
@@ -76,6 +78,14 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
 
   return (
     <section>
+      <div className="mb-2 text-xs">
+        <div className="mr-2 inline-block h-2 w-2 rounded-full bg-primary" />
+        <Link href={"/works"}>
+          <span className="">Works</span>
+          <LuChevronRight className="inline" />
+        </Link>
+        <span className="font-bold text-primary">{work?.title}</span>
+      </div>
       <article>
         <div className="group relative h-[50vh] w-full overflow-hidden">
           <div className="absolute bottom-[10%] z-50 mx-[5%]  rounded-lg bg-primary-foreground/50 p-10 px-[10%] shadow-lg backdrop-blur-sm md:bottom-[20%]">
