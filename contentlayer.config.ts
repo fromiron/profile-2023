@@ -103,8 +103,11 @@ export const Works = defineDocumentType(() => ({
       resolve: (doc) => `/${doc._raw.flattenedPath.replaceAll(" ", "-")}`,
     },
     readingTime: {
-      type: "json",
-      resolve: (doc) => readingTime(doc.body.raw),
+      type: "number",
+      resolve: (doc) => {
+        const readingTimeValue = readingTime(doc.body.raw);
+        return readingTimeRoundValue(readingTimeValue.minutes);
+      },
     },
     toc: {
       type: "json",
@@ -174,3 +177,11 @@ export default makeSource({
     ],
   },
 });
+
+function readingTimeRoundValue(number: number) {
+  if (number >= 0 && number < 1) {
+    return 1;
+  } else {
+    return Math.round(number);
+  }
+}

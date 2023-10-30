@@ -41,7 +41,7 @@ export default function PostCard({
             />
             <div className="absolute inset-0 z-50 flex items-end bg-gradient-to-t from-gray-900/70 to-gray-900/50 transition-all group-hover:to-gray-900/10">
               <div className="bg-transparent px-4 pb-4 text-white">
-                <p>{work.readingTime.text}</p>
+                <Badge variant={"secondary"}>{work.readingTime}分</Badge>
                 <h3 className="my-2 text-2xl font-semibold">{work.title}</h3>
                 <p className="sm:hidden lg:block">
                   {textSplitter(work.description, 35)[1].length > 0

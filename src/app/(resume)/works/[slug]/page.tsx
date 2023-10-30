@@ -106,7 +106,7 @@ export default async function WorkPage({ params: { slug } }: PageProps) {
 
           <div className="h-full w-full overflow-hidden rounded-xl border border-secondary object-cover object-center  transition duration-500 hover:border-primary ">
             <div className="absolute left-[5%] z-10 rounded-b-lg bg-secondary px-2 pb-1 pt-2 text-center text-[0.6rem] text-secondary-foreground shadow-sm first-letter:font-bold">
-              {work?.readingTime?.text}
+              {work?.readingTime}分
             </div>
 
             <Image
