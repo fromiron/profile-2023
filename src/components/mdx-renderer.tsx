@@ -10,9 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
-import CarouselSlider from "./ui/image-array-renderer";
 import ImageArrayRenderer from "./ui/image-array-renderer";
-import { cn } from "@/lib/utils";
 
 const StringComponent = (props: any) => {
   const { children } = props;
