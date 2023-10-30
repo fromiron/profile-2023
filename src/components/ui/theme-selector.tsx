@@ -8,15 +8,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import makeDelay from "@/lib/makeDelay";
 import { FONT_EN } from "@/styles/fonts";
-import { motion } from "framer-motion";
+import { Variants, motion, useAnimationControls } from "framer-motion";
+import { useEffect } from "react";
+
+const variants: Variants = {
+  initial: { translateX: "-100%", opacity: 0 },
+  visible: { translateX: "-10%", opacity: 1 },
+  disable: { translateX: "-85%", opacity: 1 },
+};
 
 export default function ThemeSelector() {
-  const [focus, setFocus] = useState(false);
   const { setTheme, theme } = useTheme();
-  const focusOut = () => setFocus(false);
+
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const focusOut = () => controls.start("disable");
 
   const handleThemeChange = async (theme: string) => {
     setTheme(theme);
@@ -24,23 +37,25 @@ export default function ThemeSelector() {
   };
 
   const handleFocusIn = () => {
-    setFocus(true);
+    controls.start("visible");
   };
-  const handleFocusOut = async () => {
-    if (focus) {
-      await makeDelay(7000, focusOut);
-    }
+  const handleFocusOut = () => {
+    makeDelay(4000, () => controls.start("disable"));
+  };
+
+  const init = async () => {
+    await makeDelay(1500, () => controls.start("visible"));
+    await makeDelay(4000, () => controls.start("disable"));
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={"initial"}
+      variants={variants}
+      animate={controls}
       onMouseEnter={handleFocusIn}
       onMouseLeave={handleFocusOut}
-      className={`fixed left-0 top-[1rem] z-[9999] rounded-r-lg bg-primary p-2  ${
-        focus ? "-translate-x-0" : "-translate-x-[80%]"
-      } cursor-pointer transition-transform duration-500 hover:-translate-x-0`}
+      className={`fixed left-0 top-[1rem] z-[9999] cursor-pointer rounded-r-lg bg-primary py-2 pl-7 pr-2`}
     >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

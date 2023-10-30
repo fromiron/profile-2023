@@ -4,12 +4,12 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 import { FONT_JP } from "@/styles/fonts";
-import ThemeSelector from "@/components/ui/theme-selector";
 import Providers from "../providers";
 import ResumeHeader from "@/components/layout/resume-header";
 import PageChanger from "@/components/ui/page-changer";
 import { Toaster } from "@/components/ui/toaster";
 import Head from "next/head";
+import ThemeSelector from "@/components/ui/theme-selector";
 
 export const metadata: Metadata = {
   title: "j.lee - I'm Web Developer",

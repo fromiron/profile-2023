@@ -2,72 +2,55 @@
 import makeDelay from "@/lib/makeDelay";
 import { useEffect, useState } from "react";
 import { Button } from "./button";
-import { Badge } from "./badge";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-const PageChanger = () => {
-  const [focus, setFocus] = useState(false);
-  const [path, setPath] = useState<string | null>(null);
-  const [showBubble, setShowBubble] = useState(true);
-  const pathname = usePathname();
-  const focusOut = () => setFocus(false);
+import { Variants, motion, useAnimationControls } from "framer-motion";
 
-  useEffect(() => {
-    setPath(pathname);
-  }, [pathname]);
+const variants: Variants = {
+  initial: { translateX: "100%", opacity: 0 },
+  visible: { translateX: "10%", opacity: 1 },
+  disable: { translateX: "92%", opacity: 1 },
+};
+
+const PageChanger = () => {
+  const pathname = usePathname();
+  const controls = useAnimationControls();
 
   const handleFocusIn = () => {
-    setFocus(true);
+    controls.start("visible");
   };
-  const handleFocusOut = async () => {
-    if (focus) {
-      await makeDelay(7000);
-      focusOut();
-    }
+  const handleFocusOut = () => {
+    makeDelay(4000, () => controls.start("disable"));
   };
 
+  const init = async () => {
+    await makeDelay(2000, () => controls.start("visible"));
+    await makeDelay(4000, () => controls.start("disable"));
+  };
   useEffect(() => {
-    async function setShowBubbleAsync() {
-      await makeDelay(4000);
-      setShowBubble(false);
-    }
-    setShowBubbleAsync();
-  }, [showBubble]);
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        onMouseEnter={handleFocusIn}
-        onMouseLeave={handleFocusOut}
-        className={`fixed right-0 top-[1rem] z-[9998] rounded-l-lg bg-primary p-2 ${
-          focus ? "translate-x-0" : "translate-x-[90%]"
-        } cursor-pointer transition-transform duration-500`}
-      >
-        <Link href={path === "/" ? "/profile" : "/"} className="relative">
-          <Button
-            variant="ghost"
-            size="default"
-            className="text-xs font-medium text-secondary focus-visible:ring-transparent"
-          >
-            {path === "/" ? "履歴ページ" : "メインページ"}
-          </Button>
-        </Link>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: showBubble ? 1 : 0,
-          display: showBubble ? "block" : "none",
-          transition: { delay: 1 },
-        }}
-        className="fixed right-2 top-[5rem] z-[9998]"
-      >
-        <Badge variant={"outline"}>ページ移動 ↑</Badge>
-      </motion.div>
-    </>
+    <motion.div
+      variants={variants}
+      animate={controls}
+      initial="initial"
+      onMouseEnter={handleFocusIn}
+      onMouseLeave={handleFocusOut}
+      className={`fixed right-0 top-[1rem] z-[9998] cursor-pointer rounded-l-lg bg-primary py-2 pl-2 pr-7`}
+    >
+      <Link href={pathname === "/" ? "/profile" : "/"} className="relative">
+        <Button
+          variant="ghost"
+          size="default"
+          className="text-xs font-semibold text-secondary focus-visible:ring-transparent"
+        >
+          {pathname === "/" ? "履歴ページ" : "メインページ"}
+        </Button>
+      </Link>
+    </motion.div>
   );
 };
 
