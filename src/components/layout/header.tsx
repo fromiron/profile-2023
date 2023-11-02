@@ -10,7 +10,7 @@ export const HEADER_HEIGHT = "80px";
 const Header = () => {
   return (
     <header
-      className={`fixed top-0 ${FONT_EN} header-h left-0 right-0 z-[9997] bg-background py-4`}
+      className={`sticky top-0 ${FONT_EN} header-h left-0 right-0 z-[9997] bg-background py-4`}
     >
       <motion.nav
         initial={{ y: -100 }}

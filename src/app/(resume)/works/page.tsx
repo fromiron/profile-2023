@@ -66,7 +66,7 @@ export default function WorksPage() {
 
   return (
     <section>
-      <ul className=" mb-8">
+      <ul className="mb-8">
         <Accordion type="single" collapsible>
           <AccordionItem value="tags">
             <AccordionTrigger />
