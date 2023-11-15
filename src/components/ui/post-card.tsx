@@ -42,7 +42,9 @@ export default function PostCard({
             <div className="absolute inset-0 z-50 flex items-end bg-gradient-to-t from-gray-900/70 to-gray-900/50 transition-all group-hover:to-gray-900/10">
               <div className="bg-transparent px-4 pb-4 text-white">
                 <Badge variant={"secondary"}>{work.readingTime}分</Badge>
-                <h3 className="my-2 text-2xl font-semibold">{work.title}</h3>
+                <h3 className="my-2 text-xl font-semibold lg:text-xl">
+                  {work.title}
+                </h3>
                 <p className="sm:hidden lg:block">
                   {textSplitter(work.description, 35)[1].length > 0
                     ? textSplitter(work.description, 35)[0] + "..."
@@ -51,11 +53,20 @@ export default function PostCard({
                 <div className="-mx-1 mt-2">
                   {work.tags &&
                     work.tags.length > 0 &&
-                    work.tags.map((tag) => (
-                      <Badge key={`${work.title}_${tag}`} className="mx-1 mb-1">
-                        {tag}
-                      </Badge>
-                    ))}
+                    work.tags.map((tag, i) => {
+                      if (i < 4)
+                        return (
+                          <Badge
+                            key={`${work.title}_${tag}`}
+                            className="mx-1 mb-1"
+                          >
+                            {tag}
+                          </Badge>
+                        );
+                    })}
+                  {work.tags && work.tags.length >= 4 && (
+                    <Badge className="mx-1 mb-1">...</Badge>
+                  )}
                 </div>
               </div>
             </div>
